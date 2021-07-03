@@ -6,7 +6,9 @@ import time
 
 import config
 from pokemon import Pokemon
+
 from navigation import NavigationFrame
+from pokemon_info import PokemonInfoFrame
 
 
 class SplashFrame(tk.Frame):
@@ -56,7 +58,7 @@ class Main(tk.Tk):
         splash_frame.grid_rowconfigure(0, weight = 1)
         splash_frame.grid_columnconfigure(0, weight = 1)
         splash_frame.tkraise()
-        self.after(config.SPLASH_TIME, lambda: self.show_frame('navigation'))
+        self.after(config.SPLASH_TIME, self.show_navigation)
         self.frame_stack.append(splash_frame)
 
         self.initialize()
@@ -64,19 +66,26 @@ class Main(tk.Tk):
     def initialize(self):
         self.frame_by_id = {
             'navigation': lambda master: NavigationFrame(master=master, onItemSelect=self.onNavItemSelect),
+            'pokemon_info': lambda master, pokemon: PokemonInfoFrame(master=master, pokemon=pokemon),
         }
 
     def onNavItemSelect(self, item):
-        print(item)
+        self.show_pokemon_info(item)
 
-    def show_frame(self, frame_id):
-        print(f"show_frame {frame_id}")
-        frame = self.frame_by_id[frame_id](master=self)
-        frame.grid(column=0, row=0, sticky = "nsew")
-        frame.grid_rowconfigure(0, weight = 1)
-        frame.grid_columnconfigure(0, weight = 1)
-        frame.tkraise()
-        self.frame_stack.append(frame)
+    def show_navigation(self):
+        self.frame = self.frame_by_id['navigation'](master=self)
+        self.show_current_frame()
+
+    def show_pokemon_info(self, pokemon):
+        self.frame = self.frame_by_id['pokemon_info'](master=self, pokemon=pokemon)
+        self.show_current_frame()
+
+    def show_current_frame(self):
+        self.frame.grid(column=0, row=0, sticky = "nsew")
+        self.frame.grid_rowconfigure(0, weight=1)
+        self.frame.grid_columnconfigure(0, weight=1)
+        self.frame.tkraise()
+        self.frame_stack.append(self.frame)
 
 
 if __name__ == "__main__":
