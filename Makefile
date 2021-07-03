@@ -8,7 +8,7 @@ venv: requirements.txt
 	venv/bin/pip install -r requirements.txt
 
 start: venv
-	$(VENV_PYTHON) pokedex.py
+	$(VENV_PYTHON) app/pokedex.py
 
 clean:
 	rm -rf venv
