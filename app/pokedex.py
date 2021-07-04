@@ -60,16 +60,15 @@ class Main(tk.Tk):
         splash_frame.tkraise()
         self.after(config.SPLASH_TIME, self.show_navigation)
         self.frame_stack.append(splash_frame)
-
         self.initialize()
 
     def initialize(self):
         self.frame_by_id = {
-            'navigation': lambda master: NavigationFrame(master=master, onItemSelect=self.onNavItemSelect),
+            'navigation': lambda master: NavigationFrame(master=master, on_item_select=self.on_nav_item_select),
             'pokemon_info': lambda master, pokemon: PokemonInfoFrame(master=master, pokemon=pokemon),
         }
 
-    def onNavItemSelect(self, item):
+    def on_nav_item_select(self, item):
         self.show_pokemon_info(item)
 
     def show_navigation(self):

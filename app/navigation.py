@@ -1,25 +1,28 @@
+import math
+
 import tkinter as tk
 
 import config
 from pokemon import Pokemon
 
+ITEMS_PER_PAGE = 10
+
 
 class NavigationItem(tk.Frame):
     def __init__(self, master=None, width=120, text='item', state='default', **kwargs):
         super().__init__(master, **kwargs)
-        self.items_per_page = 8
-        self.borderwidth = 2
+        highlight_thickness = 1
         self.width = width
-        self.height = (config.SCREEN_HEIGHT / self.items_per_page) - (2 * self.borderwidth) - self.items_per_page
+        self.height = (config.SCREEN_HEIGHT / ITEMS_PER_PAGE) - (2 * highlight_thickness)
         self.text = text
         self.state = state
         self.configure(
             width=self.width,
             height=self.height,
-            borderwidth=self.borderwidth,
+            borderwidth=0,
             background=self.get_background_color(),
             highlightbackground=self.get_border_color(),
-            highlightthickness=1,
+            highlightthickness=highlight_thickness,
         )
         self.canvas = tk.Canvas(
             master=self,
@@ -28,8 +31,8 @@ class NavigationItem(tk.Frame):
             width=self.width,
             height=self.height,
         )
-        self.text = self.canvas.create_text(40, 0,
-            fill="darkblue",
+        self.text = self.canvas.create_text(20, 0,
+            fill="black",
             font="courier 20",
             text=self.text,
             anchor=tk.NW,
@@ -63,57 +66,103 @@ class NavigationItem(tk.Frame):
 
 
 class NavigationFrame(tk.Frame):
-    items = [
-        Pokemon(i, f"Poke-{i}") for i in range(20)
-    ]
-    items_per_page = 4
-    def __init__(self, master=None, onItemSelect=None):
+    def __init__(self, master=None, on_item_select=None):
         super().__init__(master)
         self.master = master
-        self.onItemSelect = onItemSelect
+        self.on_item_select = on_item_select
 
         self.event_map = {
             'w': self.handle_up,
+            'a': self.handle_left,
             's': self.handle_down,
+            'd': self.handle_right,
             'k': self.handle_select,
         }
-        self.current_index = 0;
+        self.items = Pokemon.all()
+        self.frames = []
+        self.current_index = 0
+        self.current_page = 0
 
         self.bind('<KeyPress>', self.onKeyPress)
         self.focus_set()
         self.pack()
-        self.create_widgets()
+
+        self.render_page()
+
+    @property
+    def num_pages(self):
+        return int(math.ceil(len(self.items) / float(ITEMS_PER_PAGE)))
+
+    def get_items_page(self, page_index):
+        start_index = page_index * ITEMS_PER_PAGE
+        end_index = start_index + ITEMS_PER_PAGE
+        return self.items[start_index: end_index]
 
     def onKeyPress(self, e):
         if e.char in self.event_map:
             self.event_map[e.char]()
 
-    def onItemSelect(self, item):
+    def on_item_select(self, item):
         print(item)
 
     def handle_up(self):
-        self.current_index -= 1;
-        self.refresh_item(self.current_index + 1)
+        previous_index = self.current_index
+        render_new_page = False
+        if self.current_index > 0:
+            self.current_index -= 1
+        elif self.current_page > 0:
+            self.current_index = ITEMS_PER_PAGE - 1
+            self.current_page -= 1
+            render_new_page = True
+
+        self.refresh_item(previous_index)
         self.refresh_item(self.current_index)
+        if render_new_page:
+            self.render_page()
 
     def handle_down(self):
-        self.current_index += 1;
-        self.refresh_item(self.current_index - 1)
+        previous_index = self.current_index
+        render_new_page = False
+        if self.current_index < ITEMS_PER_PAGE - 1:
+            self.current_index += 1;
+        elif self.current_page < (self.num_pages - 1):
+            self.current_index = 0
+            self.current_page += 1
+            render_new_page = True
+        self.refresh_item(previous_index)
         self.refresh_item(self.current_index)
+        if render_new_page:
+            self.render_page()
+
+    def handle_left(self):
+        if self.current_page > 0:
+            self.current_index = 0
+            self.current_page -= 1
+            self.render_page()
+
+    def handle_right(self):
+        print(f"self.num_pages: {self.num_pages}")
+        if self.current_page < self.num_pages - 1:
+            self.current_index = 0
+            self.current_page += 1
+            self.render_page()
 
     def handle_select(self):
-        self.onItemSelect(self.items[self.current_index]);
+        self.on_item_select(self.items[self.current_index]);
 
-    def create_widgets(self):
-        item_height = config.SCREEN_HEIGHT / self.items_per_page
+    def render_page(self):
+        for frame in self.frames:
+            frame.destroy()
         self.frames = []
-        for i, item in enumerate(self.items):
+
+        page_items = self.get_items_page(self.current_page)
+        for i, item in enumerate(page_items):
             state = 'active' if i == self.current_index else 'inactive'
             name = i
             frame = NavigationItem(
                 master=self,
                 width=config.SCREEN_WIDTH,
-                text=item.name,
+                text=f"[{item.number}] {item.name}",
                 state=state,
             )
             frame.pack(side="top")
