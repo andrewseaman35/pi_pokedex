@@ -141,7 +141,6 @@ class NavigationFrame(tk.Frame):
             self.render_page()
 
     def handle_right(self):
-        print(f"self.num_pages: {self.num_pages}")
         if self.current_page < self.num_pages - 1:
             self.current_index = 0
             self.current_page += 1
