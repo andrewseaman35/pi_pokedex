@@ -10,4 +10,3 @@ class PokemonInfoFrame(tk.Frame):
         self.pokemon = pokemon
         self.focus_set()
         print(self.pokemon)
-
