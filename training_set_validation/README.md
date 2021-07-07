@@ -9,7 +9,7 @@ It helps me quickly display an image, and let me approve or reject that image fo
 automatically removes corrupted or otherwise un-usable images.
 
 
-![In application screenshot](https://raw.githubusercontent.com/andrewseaman35/pi_pokedex/main/screenshots/training_set_validation/usage_abra.png)
+<img src="../screenshots/training_set_validation/usage_abra.png" alt="in-app screenshot" width="300"/>
 
 
 ## Usage ##
