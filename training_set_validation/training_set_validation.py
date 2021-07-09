@@ -20,8 +20,8 @@ SCREEN_HEIGHT = 800
 
 allowed_extensions = {'.png', '.jpeg', '.jpg'}
 
-unvalidated_image_file_path = './approved_images/{}/'
-validated_image_file_path = './validated_images/{}/'
+unvalidated_image_file_path = './unvalidated_images/{}/'
+validated_image_file_path = './approved_images/{}/'
 rejected_image_file_path = './rejected_images/{}/'
 
 

@@ -1,0 +1,604 @@
+{
+    "searches": [
+        {
+            "name": "bulbasaur",
+            "terms": ["bulbasaur"]
+        },
+        {
+            "name": "ivysaur",
+            "terms": ["ivysaur"]
+        },
+        {
+            "name": "venusaur",
+            "terms": ["venusaur"]
+        },
+        {
+            "name": "charmander",
+            "terms": ["charmander"]
+        },
+        {
+            "name": "charmeleon",
+            "terms": ["charmeleon"]
+        },
+        {
+            "name": "charizard",
+            "terms": ["charizard"]
+        },
+        {
+            "name": "squirtle",
+            "terms": ["squirtle"]
+        },
+        {
+            "name": "wartortle",
+            "terms": ["wartortle"]
+        },
+        {
+            "name": "blastoise",
+            "terms": ["blastoise"]
+        },
+        {
+            "name": "caterpie",
+            "terms": ["caterpie"]
+        },
+        {
+            "name": "metapod",
+            "terms": ["metapod"]
+        },
+        {
+            "name": "butterfree",
+            "terms": ["butterfree"]
+        },
+        {
+            "name": "weedle",
+            "terms": ["weedle"]
+        },
+        {
+            "name": "kakuna",
+            "terms": ["kakuna"]
+        },
+        {
+            "name": "beedrill",
+            "terms": ["beedrill"]
+        },
+        {
+            "name": "pidgey",
+            "terms": ["pidgey"]
+        },
+        {
+            "name": "pidgeotto",
+            "terms": ["pidgeotto"]
+        },
+        {
+            "name": "pidgeot",
+            "terms": ["pidgeot"]
+        },
+        {
+            "name": "rattata",
+            "terms": ["rattata"]
+        },
+        {
+            "name": "raticate",
+            "terms": ["raticate"]
+        },
+        {
+            "name": "spearow",
+            "terms": ["spearow"]
+        },
+        {
+            "name": "fearow",
+            "terms": ["fearow"]
+        },
+        {
+            "name": "ekans",
+            "terms": ["ekans"]
+        },
+        {
+            "name": "arbok",
+            "terms": ["arbok"]
+        },
+        {
+            "name": "pikachu",
+            "terms": ["pikachu"]
+        },
+        {
+            "name": "raichu",
+            "terms": ["raichu"]
+        },
+        {
+            "name": "sandshrew",
+            "terms": ["sandshrew"]
+        },
+        {
+            "name": "sandslash",
+            "terms": ["sandslash"]
+        },
+        {
+            "name": "nidoran_male",
+            "terms": ["nidoran♀"]
+        },
+        {
+            "name": "nidorina",
+            "terms": ["nidorina"]
+        },
+        {
+            "name": "nidoqueen",
+            "terms": ["nidoqueen"]
+        },
+        {
+            "name": "nidoran_female",
+            "terms": ["nidoran♂"]
+        },
+        {
+            "name": "nidorino",
+            "terms": ["nidorino"]
+        },
+        {
+            "name": "nidoking",
+            "terms": ["nidoking"]
+        },
+        {
+            "name": "clefairy",
+            "terms": ["clefairy"]
+        },
+        {
+            "name": "clefable",
+            "terms": ["clefable"]
+        },
+        {
+            "name": "vulpix",
+            "terms": ["vulpix"]
+        },
+        {
+            "name": "ninetales",
+            "terms": ["ninetales"]
+        },
+        {
+            "name": "jigglypuff",
+            "terms": ["jigglypuff"]
+        },
+        {
+            "name": "wigglytuff",
+            "terms": ["wigglytuff"]
+        },
+        {
+            "name": "zubat",
+            "terms": ["zubat"]
+        },
+        {
+            "name": "golbat",
+            "terms": ["golbat"]
+        },
+        {
+            "name": "oddish",
+            "terms": ["oddish"]
+        },
+        {
+            "name": "gloom",
+            "terms": ["gloom"]
+        },
+        {
+            "name": "vileplume",
+            "terms": ["vileplume"]
+        },
+        {
+            "name": "paras",
+            "terms": ["paras"]
+        },
+        {
+            "name": "parasect",
+            "terms": ["parasect"]
+        },
+        {
+            "name": "venonat",
+            "terms": ["venonat"]
+        },
+        {
+            "name": "venomoth",
+            "terms": ["venomoth"]
+        },
+        {
+            "name": "diglett",
+            "terms": ["diglett"]
+        },
+        {
+            "name": "dugtrio",
+            "terms": ["dugtrio"]
+        },
+        {
+            "name": "meowth",
+            "terms": ["meowth"]
+        },
+        {
+            "name": "persian",
+            "terms": ["persian"]
+        },
+        {
+            "name": "psyduck",
+            "terms": ["psyduck"]
+        },
+        {
+            "name": "golduck",
+            "terms": ["golduck"]
+        },
+        {
+            "name": "mankey",
+            "terms": ["mankey"]
+        },
+        {
+            "name": "primeape",
+            "terms": ["primeape"]
+        },
+        {
+            "name": "growlithe",
+            "terms": ["growlithe"]
+        },
+        {
+            "name": "arcanine",
+            "terms": ["arcanine"]
+        },
+        {
+            "name": "poliwag",
+            "terms": ["poliwag"]
+        },
+        {
+            "name": "poliwhirl",
+            "terms": ["poliwhirl"]
+        },
+        {
+            "name": "poliwrath",
+            "terms": ["poliwrath"]
+        },
+        {
+            "name": "abra",
+            "terms": ["abra"]
+        },
+        {
+            "name": "kadabra",
+            "terms": ["kadabra"]
+        },
+        {
+            "name": "alakazam",
+            "terms": ["alakazam"]
+        },
+        {
+            "name": "machop",
+            "terms": ["machop"]
+        },
+        {
+            "name": "machoke",
+            "terms": ["machoke"]
+        },
+        {
+            "name": "machamp",
+            "terms": ["machamp"]
+        },
+        {
+            "name": "bellsprout",
+            "terms": ["bellsprout"]
+        },
+        {
+            "name": "weepinbell",
+            "terms": ["weepinbell"]
+        },
+        {
+            "name": "victreebel",
+            "terms": ["victreebel"]
+        },
+        {
+            "name": "tentacool",
+            "terms": ["tentacool"]
+        },
+        {
+            "name": "tentacruel",
+            "terms": ["tentacruel"]
+        },
+        {
+            "name": "geodude",
+            "terms": ["geodude"]
+        },
+        {
+            "name": "graveler",
+            "terms": ["graveler"]
+        },
+        {
+            "name": "golem",
+            "terms": ["golem"]
+        },
+        {
+            "name": "ponyta",
+            "terms": ["ponyta"]
+        },
+        {
+            "name": "rapidash",
+            "terms": ["rapidash"]
+        },
+        {
+            "name": "slowpoke",
+            "terms": ["slowpoke"]
+        },
+        {
+            "name": "slowbro",
+            "terms": ["slowbro"]
+        },
+        {
+            "name": "magnemite",
+            "terms": ["magnemite"]
+        },
+        {
+            "name": "magneton",
+            "terms": ["magneton"]
+        },
+        {
+            "name": "farfetch",
+            "terms": ["farfetch"]
+        },
+        {
+            "name": "doduo",
+            "terms": ["doduo"]
+        },
+        {
+            "name": "dodrio",
+            "terms": ["dodrio"]
+        },
+        {
+            "name": "seel",
+            "terms": ["seel"]
+        },
+        {
+            "name": "dewgong",
+            "terms": ["dewgong"]
+        },
+        {
+            "name": "grimer",
+            "terms": ["grimer"]
+        },
+        {
+            "name": "muk",
+            "terms": ["muk"]
+        },
+        {
+            "name": "shellder",
+            "terms": ["shellder"]
+        },
+        {
+            "name": "cloyster",
+            "terms": ["cloyster"]
+        },
+        {
+            "name": "gastly",
+            "terms": ["gastly"]
+        },
+        {
+            "name": "haunter",
+            "terms": ["haunter"]
+        },
+        {
+            "name": "gengar",
+            "terms": ["gengar"]
+        },
+        {
+            "name": "onix",
+            "terms": ["onix"]
+        },
+        {
+            "name": "drowzee",
+            "terms": ["drowzee"]
+        },
+        {
+            "name": "hypno",
+            "terms": ["hypno"]
+        },
+        {
+            "name": "krabby",
+            "terms": ["krabby"]
+        },
+        {
+            "name": "kingler",
+            "terms": ["kingler"]
+        },
+        {
+            "name": "voltorb",
+            "terms": ["voltorb"]
+        },
+        {
+            "name": "electrode",
+            "terms": ["electrode"]
+        },
+        {
+            "name": "exeggcute",
+            "terms": ["exeggcute"]
+        },
+        {
+            "name": "exeggutor",
+            "terms": ["exeggutor"]
+        },
+        {
+            "name": "cubone",
+            "terms": ["cubone"]
+        },
+        {
+            "name": "marowak",
+            "terms": ["marowak"]
+        },
+        {
+            "name": "hitmonlee",
+            "terms": ["hitmonlee"]
+        },
+        {
+            "name": "hitmonchan",
+            "terms": ["hitmonchan"]
+        },
+        {
+            "name": "lickitung",
+            "terms": ["lickitung"]
+        },
+        {
+            "name": "koffing",
+            "terms": ["koffing"]
+        },
+        {
+            "name": "weezing",
+            "terms": ["weezing"]
+        },
+        {
+            "name": "rhyhorn",
+            "terms": ["rhyhorn"]
+        },
+        {
+            "name": "rhydon",
+            "terms": ["rhydon"]
+        },
+        {
+            "name": "chansey",
+            "terms": ["chansey"]
+        },
+        {
+            "name": "tangela",
+            "terms": ["tangela"]
+        },
+        {
+            "name": "kangaskhan",
+            "terms": ["kangaskhan"]
+        },
+        {
+            "name": "horsea",
+            "terms": ["horsea"]
+        },
+        {
+            "name": "seadra",
+            "terms": ["seadra"]
+        },
+        {
+            "name": "goldeen",
+            "terms": ["goldeen"]
+        },
+        {
+            "name": "seaking",
+            "terms": ["seaking"]
+        },
+        {
+            "name": "staryu",
+            "terms": ["staryu"]
+        },
+        {
+            "name": "starmie",
+            "terms": ["starmie"]
+        },
+        {
+            "name": "mr_mime",
+            "terms": ["mr. mime"]
+        },
+        {
+            "name": "scyther",
+            "terms": ["scyther"]
+        },
+        {
+            "name": "jynx",
+            "terms": ["jynx"]
+        },
+        {
+            "name": "electabuzz",
+            "terms": ["electabuzz"]
+        },
+        {
+            "name": "magmar",
+            "terms": ["magmar"]
+        },
+        {
+            "name": "pinsir",
+            "terms": ["pinsir"]
+        },
+        {
+            "name": "tauros",
+            "terms": ["tauros"]
+        },
+        {
+            "name": "magikarp",
+            "terms": ["magikarp"]
+        },
+        {
+            "name": "gyarados",
+            "terms": ["gyarados"]
+        },
+        {
+            "name": "lapras",
+            "terms": ["lapras"]
+        },
+        {
+            "name": "ditto",
+            "terms": ["ditto"]
+        },
+        {
+            "name": "eevee",
+            "terms": ["eevee"]
+        },
+        {
+            "name": "vaporeon",
+            "terms": ["vaporeon"]
+        },
+        {
+            "name": "jolteon",
+            "terms": ["jolteon"]
+        },
+        {
+            "name": "flareon",
+            "terms": ["flareon"]
+        },
+        {
+            "name": "porygon",
+            "terms": ["porygon"]
+        },
+        {
+            "name": "omanyte",
+            "terms": ["omanyte"]
+        },
+        {
+            "name": "omastar",
+            "terms": ["omastar"]
+        },
+        {
+            "name": "kabuto",
+            "terms": ["kabuto"]
+        },
+        {
+            "name": "kabutops",
+            "terms": ["kabutops"]
+        },
+        {
+            "name": "aerodactyl",
+            "terms": ["aerodactyl"]
+        },
+        {
+            "name": "snorlax",
+            "terms": ["snorlax"]
+        },
+        {
+            "name": "articuno",
+            "terms": ["articuno"]
+        },
+        {
+            "name": "zapdos",
+            "terms": ["zapdos"]
+        },
+        {
+            "name": "moltres",
+            "terms": ["moltres"]
+        },
+        {
+            "name": "dratini",
+            "terms": ["dratini"]
+        },
+        {
+            "name": "dragonair",
+            "terms": ["dragonair"]
+        },
+        {
+            "name": "dragonite",
+            "terms": ["dragonite"]
+        },
+        {
+            "name": "mewtwo",
+            "terms": ["mewtwo"]
+        }
+    ]
+}
