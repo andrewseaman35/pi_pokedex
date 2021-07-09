@@ -119,13 +119,18 @@ class TrainingSetDownloader(BaseScript):
             print(f"   Searching for: {term}")
             google_crawler = GoogleImageCrawler(
                 storage={'root_dir': images_directory},
-                feeder_threads=1,
+                feeder_threads=3,
+                parser_threads=3,
                 downloader_threads=1,
                 parser_cls=CustomGoogleParser,
                 downloader_cls=CustomGoogleImageDownloader,
                 extra_downloader_args={
                     'download_images': self.download_images,
-                    'logger': logger,
+                    # 'logger': logger,
+                },
+                extra_parser_args={
+                    'url_logger': logger,
+                    'download_images': self.download_images,
                 },
                 log_level=20)
             google_crawler.crawl(keyword=term, max_num=limit_per_search)
@@ -155,15 +160,18 @@ class UrlLogger(Logger):
         super().__init__(name)
         self.url_file = url_file
 
+    def log_url(self, url):
+        with open(self.url_file, 'a') as f:
+            f.write(f"{url}\n")
+
     def info(self, msg, *args, **kwargs):
         if self.url_file:
             log_match = self.search_pattern.match(msg)
             url = log_match.group(1) if log_match else None
-            with open(self.url_file, 'a') as f:
-                if url:
-                    f.write(f"{url}\n")
+            if url:
+                self.log_url(url)
 
-        super().info(msg, *args, **kwargs)
+        super(UrlLogger, self).info(msg, *args, **kwargs)
 
 
 class CustomGoogleParser(Parser):
@@ -171,6 +179,11 @@ class CustomGoogleParser(Parser):
     A copy of `icrawler.builtin.GoogleParser` with a parsing step
     added that fixes a parsing issue.
     """
+    def __init__(self, thread_num, signal, session, download_images=False, url_logger=None):
+        super().__init__(thread_num, signal, session)
+        self.url_logger = url_logger
+        self.download_images = download_images
+
     def parse(self, response):
         soup = BeautifulSoup(
             response.content.decode('utf-8', 'ignore'), 'lxml')
@@ -195,7 +208,14 @@ class CustomGoogleParser(Parser):
             # I suspect that the response from the request changed a bit and this hasn't
             # been updated to match. This seems to work fine.
             parsed_uris = [uri.split(',')[-1].strip('[').strip('"') for uri in uris]
+            print(f"adding {len(parsed_uris)} urls")
             return [{'file_url': uri} for uri in parsed_uris]
+
+    def output(self, task, block=True, timeout=None):
+        if self.download_images and self.out_queue is not None:
+            self.out_queue.put(task, block, timeout)
+        if self.url_logger:
+            self.url_logger.log_url(task['file_url'])
 
 
 class CustomGoogleImageDownloader(ImageDownloader):
@@ -203,6 +223,7 @@ class CustomGoogleImageDownloader(ImageDownloader):
     Pretty close to icrawler.builtin.GoogleImageDownloader. Added a flag to skip the downloading
     of images and a way to override the logger.
     """
+    count = 0
     def __init__(self, thread_num, signal, session, storage, download_images=False, logger=None):
         super().__init__(thread_num, signal, session, storage)
         self.download_images = download_images
@@ -210,7 +231,7 @@ class CustomGoogleImageDownloader(ImageDownloader):
             self.logger = logger
 
     def keep_file(self, *args, **kwargs):
-        return self.download_images
+        return True
 
     def get_filename(self, task, default_ext=''):
         url_path = urlparse(task['file_url'])[2]
@@ -224,6 +245,9 @@ class CustomGoogleImageDownloader(ImageDownloader):
             extension = default_ext
         name = str(uuid.uuid4()).replace('-','')
         return '{}.{}'.format(name, extension)
+
+    def process_meta(self, task):
+        print('processing meta')
 
     def download(self,
                  task,
@@ -244,6 +268,8 @@ class CustomGoogleImageDownloader(ImageDownloader):
         task['filename'] = None
         retry = max_retry
 
+        self.count += 1
+        print(self.count)
         while retry > 0 and not self.signal.get('reach_max_num'):
             try:
                 if self.download_images:
@@ -255,14 +281,15 @@ class CustomGoogleImageDownloader(ImageDownloader):
             else:
                 if self.reach_max_num():
                     self.signal.set(reach_max_num=True)
+                    print('max reached')
                     break
                 elif self.download_images and response.status_code != 200:
                     self.logger.error('Response status code %d, file %s',
                                       response.status_code, file_url)
                     break
                 elif not self.download_images:
-                    self.fetched_num += 1
                     self.logger.info(f"image|{file_url}")
+                    self.fetched_num += 1
                     break
                 with self.lock:
                     self.fetched_num += 1
