@@ -212,12 +212,6 @@ class CustomGoogleImageDownloader(ImageDownloader):
     def keep_file(self, *args, **kwargs):
         return self.download_images
 
-    def get_filename(self, task, *args, **kwargs):
-        url_path = urlparse(task['file_url'])[2]
-
-        return str(uuid.uuid4()).replace('-','')
-
-
     def get_filename(self, task, default_ext=''):
         url_path = urlparse(task['file_url'])[2]
         if '.' in url_path:
@@ -252,7 +246,8 @@ class CustomGoogleImageDownloader(ImageDownloader):
 
         while retry > 0 and not self.signal.get('reach_max_num'):
             try:
-                response = self.session.get(file_url, timeout=timeout)
+                if self.download_images:
+                    response = self.session.get(file_url, timeout=timeout)
             except Exception as e:
                 self.logger.error('Exception caught when downloading file %s, '
                                   'error: %s, remaining retry times: %d',
@@ -261,11 +256,11 @@ class CustomGoogleImageDownloader(ImageDownloader):
                 if self.reach_max_num():
                     self.signal.set(reach_max_num=True)
                     break
-                elif response.status_code != 200:
+                elif self.download_images and response.status_code != 200:
                     self.logger.error('Response status code %d, file %s',
                                       response.status_code, file_url)
                     break
-                elif not self.keep_file(task, response, **kwargs):
+                elif not self.download_images:
                     self.fetched_num += 1
                     self.logger.info(f"image|{file_url}")
                     break
