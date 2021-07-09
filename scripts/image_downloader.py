@@ -208,7 +208,6 @@ class CustomGoogleParser(Parser):
             # I suspect that the response from the request changed a bit and this hasn't
             # been updated to match. This seems to work fine.
             parsed_uris = [uri.split(',')[-1].strip('[').strip('"') for uri in uris]
-            print(f"adding {len(parsed_uris)} urls")
             return [{'file_url': uri} for uri in parsed_uris]
 
     def output(self, task, block=True, timeout=None):
@@ -223,7 +222,6 @@ class CustomGoogleImageDownloader(ImageDownloader):
     Pretty close to icrawler.builtin.GoogleImageDownloader. Added a flag to skip the downloading
     of images and a way to override the logger.
     """
-    count = 0
     def __init__(self, thread_num, signal, session, storage, download_images=False, logger=None):
         super().__init__(thread_num, signal, session, storage)
         self.download_images = download_images
@@ -246,9 +244,6 @@ class CustomGoogleImageDownloader(ImageDownloader):
         name = str(uuid.uuid4()).replace('-','')
         return '{}.{}'.format(name, extension)
 
-    def process_meta(self, task):
-        print('processing meta')
-
     def download(self,
                  task,
                  default_ext,
@@ -268,8 +263,6 @@ class CustomGoogleImageDownloader(ImageDownloader):
         task['filename'] = None
         retry = max_retry
 
-        self.count += 1
-        print(self.count)
         while retry > 0 and not self.signal.get('reach_max_num'):
             try:
                 if self.download_images:
@@ -281,7 +274,6 @@ class CustomGoogleImageDownloader(ImageDownloader):
             else:
                 if self.reach_max_num():
                     self.signal.set(reach_max_num=True)
-                    print('max reached')
                     break
                 elif self.download_images and response.status_code != 200:
                     self.logger.error('Response status code %d, file %s',

@@ -174,7 +174,7 @@
         },
         {
             "name": "gloom",
-            "terms": ["gloom"]
+            "terms": ["gloom pokemon"]
         },
         {
             "name": "vileplume",
@@ -182,7 +182,7 @@
         },
         {
             "name": "paras",
-            "terms": ["paras"]
+            "terms": ["paras pokemon"]
         },
         {
             "name": "parasect",
@@ -250,15 +250,15 @@
         },
         {
             "name": "abra",
-            "terms": ["abra"]
+            "terms": ["abra pokemon"]
         },
         {
             "name": "kadabra",
-            "terms": ["kadabra"]
+            "terms": ["kadabra pokemon"]
         },
         {
             "name": "alakazam",
-            "terms": ["alakazam"]
+            "terms": ["alakazam pokemon"]
         },
         {
             "name": "machop",
@@ -378,7 +378,7 @@
         },
         {
             "name": "onix",
-            "terms": ["onix"]
+            "terms": ["onix pokemon"]
         },
         {
             "name": "drowzee",
@@ -386,7 +386,7 @@
         },
         {
             "name": "hypno",
-            "terms": ["hypno"]
+            "terms": ["hypno pokemon"]
         },
         {
             "name": "krabby",
@@ -526,7 +526,7 @@
         },
         {
             "name": "ditto",
-            "terms": ["ditto"]
+            "terms": ["ditto pokemon"]
         },
         {
             "name": "eevee",
