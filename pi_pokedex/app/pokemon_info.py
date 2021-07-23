@@ -9,4 +9,4 @@ class PokemonInfoFrame(tk.Frame):
         self.master = master
         self.pokemon = pokemon
         self.focus_set()
-        print(self.pokemon)
+        print(self.pokemon.__dict__)
