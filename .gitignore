@@ -1,4 +1,6 @@
+.DS_Store
 scripts/
+tensorflow/
 
 **/venv/
 **/*.py?

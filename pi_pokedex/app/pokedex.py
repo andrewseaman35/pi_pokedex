@@ -2,7 +2,6 @@ import PIL.Image
 import PIL.ImageTk
 
 import tkinter as tk
-import time
 
 import config
 from pokemon import Pokemon
@@ -23,7 +22,7 @@ class SplashFrame(tk.Frame):
     def render_image(self):
         im = PIL.Image.open("./assets/img/pokemon_logo_3x.png").convert('RGB')
         im.thumbnail(self.image_size)
-
+        
         photo = PIL.ImageTk.PhotoImage(im)
         label = tk.Label(self, image=photo)
         label.image = photo

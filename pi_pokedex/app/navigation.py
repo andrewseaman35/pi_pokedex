@@ -80,7 +80,7 @@ class NavigationFrame(tk.Frame):
         }
         self.items = Pokemon.all()
         self.frames = []
-        self.current_index = 0
+        self.current_page_index = 0
         self.current_page = 0
 
         self.bind('<KeyPress>', self.onKeyPress)
@@ -92,6 +92,10 @@ class NavigationFrame(tk.Frame):
     @property
     def num_pages(self):
         return int(math.ceil(len(self.items) / float(ITEMS_PER_PAGE)))
+
+    @property
+    def current_index(self):
+        return (self.current_page * ITEMS_PER_PAGE) + self.current_page_index
 
     def get_items_page(self, page_index):
         start_index = page_index * ITEMS_PER_PAGE
@@ -106,43 +110,43 @@ class NavigationFrame(tk.Frame):
         print(item)
 
     def handle_up(self):
-        previous_index = self.current_index
+        previous_index = self.current_page_index
         render_new_page = False
-        if self.current_index > 0:
-            self.current_index -= 1
+        if self.current_page_index > 0:
+            self.current_page_index -= 1
         elif self.current_page > 0:
-            self.current_index = ITEMS_PER_PAGE - 1
+            self.current_page_index = ITEMS_PER_PAGE - 1
             self.current_page -= 1
             render_new_page = True
 
         self.refresh_item(previous_index)
-        self.refresh_item(self.current_index)
+        self.refresh_item(self.current_page_index)
         if render_new_page:
             self.render_page()
 
     def handle_down(self):
-        previous_index = self.current_index
+        previous_index = self.current_page_index
         render_new_page = False
-        if self.current_index < ITEMS_PER_PAGE - 1:
-            self.current_index += 1;
+        if self.current_page_index < ITEMS_PER_PAGE - 1:
+            self.current_page_index += 1;
         elif self.current_page < (self.num_pages - 1):
-            self.current_index = 0
+            self.current_page_index = 0
             self.current_page += 1
             render_new_page = True
         self.refresh_item(previous_index)
-        self.refresh_item(self.current_index)
+        self.refresh_item(self.current_page_index)
         if render_new_page:
             self.render_page()
 
     def handle_left(self):
         if self.current_page > 0:
-            self.current_index = 0
+            self.current_page_index = 0
             self.current_page -= 1
             self.render_page()
 
     def handle_right(self):
         if self.current_page < self.num_pages - 1:
-            self.current_index = 0
+            self.current_page_index = 0
             self.current_page += 1
             self.render_page()
 
@@ -156,7 +160,7 @@ class NavigationFrame(tk.Frame):
 
         page_items = self.get_items_page(self.current_page)
         for i, item in enumerate(page_items):
-            state = 'active' if i == self.current_index else 'inactive'
+            state = 'active' if i == self.current_page_index else 'inactive'
             name = i
             frame = NavigationItem(
                 master=self,
@@ -169,5 +173,5 @@ class NavigationFrame(tk.Frame):
 
     def refresh_item(self, index):
         frame = self.frames[index]
-        state = 'active' if index == self.current_index else 'inactive'
+        state = 'active' if index == self.current_page_index else 'inactive'
         frame.set_state(state)
