@@ -53,7 +53,7 @@ class Main(tk.Tk):
 
     def display_splash_and_initialize(self):
         splash_frame = SplashFrame(master=self)
-        splash_frame.grid(column=0, row=0, sticky = "nsew")
+        splash_frame.grid(column=0, row=0, sticky="nsew")
         splash_frame.grid_rowconfigure(0, weight = 1)
         splash_frame.grid_columnconfigure(0, weight = 1)
         splash_frame.tkraise()
@@ -79,7 +79,7 @@ class Main(tk.Tk):
         self.show_current_frame()
 
     def show_current_frame(self):
-        self.frame.grid(column=0, row=0, sticky = "nsew")
+        self.frame.grid(column=0, row=0, sticky="nsew")
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
         self.frame.tkraise()

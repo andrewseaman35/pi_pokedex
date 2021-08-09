@@ -18,8 +18,6 @@ class InfoHeader(tk.Frame):
             background=config.BACKGROUND_COLOR,
             highlightbackground=config.BACKGROUND_COLOR,
             highlightthickness=0,
-            padx=10,
-            pady=10,
         )
         self.canvas = tk.Canvas(
             master=self,
@@ -30,15 +28,15 @@ class InfoHeader(tk.Frame):
         )
         self.number_text = self.canvas.create_text(0, 0,
             fill="black",
-            font="courier 10",
+            font=(config.TYPEFACE, 10),
             text=self.pokemon.number_string,
             anchor=tk.NW,
         )
         self.pokemon_text = self.canvas.create_text(0, 12,
             fill="black",
-            font="courier 14",
+            font=(f"{config.TYPEFACE} Medium", 14),
             text=pokemon.name,
             anchor=tk.NW,
         )
         self.badges = TypeBadges(self, pokemon.types)
-        self.canvas.pack(side="left")
+        self.canvas.pack(side=tk.LEFT)

@@ -33,7 +33,7 @@ class NavigationItem(tk.Frame):
         )
         self.text = self.canvas.create_text(20, 0,
             fill="black",
-            font="courier 20",
+            font=(config.TYPEFACE, 16),
             text=self.text,
             anchor=tk.NW,
         )
@@ -168,7 +168,7 @@ class NavigationFrame(tk.Frame):
                 text=f"[{item.number}] {item.name}",
                 state=state,
             )
-            frame.pack(side="top")
+            frame.pack(side=tk.TOP)
             self.frames.append(frame)
 
     def refresh_item(self, index):

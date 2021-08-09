@@ -7,7 +7,7 @@ import config
 
 
 class Badge(tk.Frame):
-    image_size = (24, 24)
+    image_size = (30, 30)
 
     def __init__(self, master, badge_type):
         super().__init__(master, bg='white')

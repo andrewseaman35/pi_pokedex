@@ -11,7 +11,7 @@ class DescriptionSection(tk.Frame):
         
         self.configure(
             width=config.SCREEN_WIDTH,
-            height=config.DESCRIPTION_HEIGHT - 20,
+            height=config.DESCRIPTION_HEIGHT,
             borderwidth=0,
             background=config.BACKGROUND_COLOR,
             highlightbackground=config.BACKGROUND_COLOR,
@@ -23,14 +23,14 @@ class DescriptionSection(tk.Frame):
             highlightthickness=0,
             background=config.BACKGROUND_COLOR,
             width=config.SCREEN_WIDTH,
-            height=config.DESCRIPTION_HEIGHT - 20,
+            height=config.DESCRIPTION_HEIGHT,
         )
         self.text = self.canvas.create_text(0, 0,
             fill="black",
-            font="courier 10",
+            font=(config.TYPEFACE, 10),
             text=self.description,
             anchor=tk.NW,
             width=config.SCREEN_WIDTH - 20
         )
         # self.canvas.pack(side="left")
-        self.canvas.grid(row=0, column=0, pady=10)
+        self.canvas.grid(row=0, column=0, pady=5)
