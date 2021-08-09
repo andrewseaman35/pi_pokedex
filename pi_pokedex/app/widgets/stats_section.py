@@ -41,7 +41,7 @@ class PokemonImage(tk.Frame):
 
 
 class StatsColumn(tk.Frame):
-    def __init__(self, master, label_chars, value_chars, data, keys):
+    def __init__(self, master, label_chars, value_chars, value_anchor, data, keys):
         super().__init__(master)
         self.master = master
 
@@ -71,8 +71,8 @@ class StatsColumn(tk.Frame):
                 self, 
                 text=value, 
                 font=(f"{config.TYPEFACE} Bold", 9), 
-                anchor=tk.E, 
-                justify=tk.RIGHT,
+                anchor=value_anchor, 
+                justify=tk.LEFT,
                 wraplength=70,
                 width=value_chars,
             )
@@ -91,6 +91,7 @@ class StatsTable(tk.Frame):
             master=self, 
             label_chars=config.STATS_LABEL_CHARS, 
             value_chars=config.STATS_VALUE_CHARS, 
+            value_anchor=tk.W,
             data=pokemon.stats, 
             keys=self.stat_keys,
         )
@@ -98,6 +99,7 @@ class StatsTable(tk.Frame):
             master=self, 
             label_chars=config.BASE_STATS_LABEL_CHARS, 
             value_chars=config.BASE_STATS_VALUE_CHARS, 
+            value_anchor=tk.E,
             data=pokemon.base_stats, 
             keys=self.base_stat_keys,
         )

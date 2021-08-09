@@ -16,9 +16,12 @@ class PokemonInfoFrame(tk.Frame):
         header = InfoHeader(self, self.pokemon)
         stats = StatsSection(self, self.pokemon)
         description = DescriptionSection(self, self.pokemon.red_description)
-        # evolutions = EvolutionSection(self, self.pokemon.evolutions)
+        evolutions = EvolutionSection(self, self.pokemon)
         header.pack(side=tk.TOP, padx=10, pady=(10, 8),)
         stats.pack(side=tk.TOP, padx=10)
         description.pack(side=tk.TOP)
-        # evolutions.pack(side=tk.TOP)
+        evolutions.pack(side=tk.TOP, expand=True)
+        
+        # Force the fame to be full width
+        evolutions.pack_propagate(0)
         print(self.pokemon.__dict__)

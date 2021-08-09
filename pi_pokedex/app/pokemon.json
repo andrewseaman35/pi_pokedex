@@ -640,7 +640,7 @@
             "types": ["Electric"],
             "weaknesses": ["Ground"]
         },
-        "evolutions": [172, 25, 26],
+        "evolutions": [25, 26],
         "base_stats": {
             "hp": 35,
             "attack": 55,
@@ -666,7 +666,7 @@
             "types": ["Electric"],
             "weaknesses": ["Ground"]
         },
-        "evolutions": [172, 25, 26],
+        "evolutions": [25, 26],
         "base_stats": {
             "hp": 60,
             "attack": 90,
@@ -900,7 +900,7 @@
             "types": ["Fairy"],
             "weaknesses": ["Steel", "Poison"]
         },
-        "evolutions": [173, 35, 36],
+        "evolutions": [35, 36],
         "base_stats": {
             "hp": 70,
             "attack": 45,
@@ -926,7 +926,7 @@
             "types": ["Fairy"],
             "weaknesses": ["Steel", "Poison"]
         },
-        "evolutions": [173, 35, 36],
+        "evolutions": [35, 36],
         "base_stats": {
             "hp": 95,
             "attack": 70,
@@ -1004,7 +1004,7 @@
             "types": ["Normal", "Fairy"],
             "weaknesses": ["Steel", "Poison"]
         },
-        "evolutions": [174, 39, 40],
+        "evolutions": [39, 40],
         "base_stats": {
             "hp": 115,
             "attack": 45,
@@ -1030,7 +1030,7 @@
             "types": ["Normal", "Fairy"],
             "weaknesses": ["Steel", "Poison"]
         },
-        "evolutions": [174, 39, 40],
+        "evolutions": [39, 40],
         "base_stats": {
             "hp": 140,
             "attack": 70,
@@ -1056,7 +1056,7 @@
             "types": ["Poison", "Flying"],
             "weaknesses": ["Psychic", "Electric", "Ice", "Rock"]
         },
-        "evolutions": [41, 42, 169],
+        "evolutions": [41, 42],
         "base_stats": {
             "hp": 40,
             "attack": 45,
@@ -1082,7 +1082,7 @@
             "types": ["Poison", "Flying"],
             "weaknesses": ["Psychic", "Electric", "Ice", "Rock"]
         },
-        "evolutions": [41, 42, 169],
+        "evolutions": [41, 42],
         "base_stats": {
             "hp": 75,
             "attack": 80,
@@ -2096,7 +2096,7 @@
             "types": ["Electric", "Steel"],
             "weaknesses": ["Fire", "Fighting", "Ground"]
         },
-        "evolutions": [81, 82, 462],
+        "evolutions": [81, 82],
         "base_stats": {
             "hp": 25,
             "attack": 35,
@@ -2122,7 +2122,7 @@
             "types": ["Electric", "Steel"],
             "weaknesses": ["Fire", "Fighting", "Ground"]
         },
-        "evolutions": [81, 82, 462],
+        "evolutions": [81, 82],
         "base_stats": {
             "hp": 50,
             "attack": 60,
@@ -2460,7 +2460,7 @@
             "types": ["Rock", "Ground"],
             "weaknesses": ["Steel", "Fighting", "Water", "Ice", "Grass", "Ground"]
         },
-        "evolutions": [95, 208],
+        "evolutions": [95],
         "base_stats": {
             "hp": 35,
             "attack": 45,
@@ -2746,7 +2746,7 @@
             "types": ["Fighting"],
             "weaknesses": ["Psychic", "Flying", "Fairy"]
         },
-        "evolutions": [236, 106],
+        "evolutions": [106],
         "base_stats": {
             "hp": 50,
             "attack": 120,
@@ -2772,7 +2772,7 @@
             "types": ["Fighting"],
             "weaknesses": ["Psychic", "Flying", "Fairy"]
         },
-        "evolutions": [236, 106],
+        "evolutions": [106],
         "base_stats": {
             "hp": 50,
             "attack": 105,
@@ -2798,7 +2798,7 @@
             "types": ["Normal"],
             "weaknesses": ["Fighting"]
         },
-        "evolutions": [108, 463],
+        "evolutions": [108],
         "base_stats": {
             "hp": 90,
             "attack": 55,
@@ -2876,7 +2876,7 @@
             "types": ["Ground", "Rock"],
             "weaknesses": ["Steel", "Ice", "Water", "Fighting", "Grass", "Ground"]
         },
-        "evolutions": [111, 112, 464],
+        "evolutions": [111, 112],
         "base_stats": {
             "hp": 80,
             "attack": 85,
@@ -2902,7 +2902,7 @@
             "types": ["Ground", "Rock"],
             "weaknesses": ["Steel", "Ice", "Water", "Fighting", "Grass", "Ground"]
         },
-        "evolutions": [111, 112, 464],
+        "evolutions": [111, 112],
         "base_stats": {
             "hp": 105,
             "attack": 130,
@@ -2928,7 +2928,7 @@
             "types": ["Normal"],
             "weaknesses": ["Fighting"]
         },
-        "evolutions": [440, 113, 242],
+        "evolutions": [113],
         "base_stats": {
             "hp": 250,
             "attack": 5,
@@ -2954,7 +2954,7 @@
             "types": ["Grass"],
             "weaknesses": ["Fire", "Flying", "Ice", "Poison", "Bug"]
         },
-        "evolutions": [114, 465],
+        "evolutions": [114],
         "base_stats": {
             "hp": 65,
             "attack": 55,
@@ -3006,7 +3006,7 @@
             "types": ["Water"],
             "weaknesses": ["Grass", "Electric"]
         },
-        "evolutions": [116, 117, 230],
+        "evolutions": [116, 117],
         "base_stats": {
             "hp": 30,
             "attack": 40,
@@ -3032,7 +3032,7 @@
             "types": ["Water"],
             "weaknesses": ["Grass", "Electric"]
         },
-        "evolutions": [116, 117, 230],
+        "evolutions": [116, 117],
         "base_stats": {
             "hp": 55,
             "attack": 65,
@@ -3162,7 +3162,7 @@
             "types": ["Psychic", "Fairy"],
             "weaknesses": ["Ghost", "Steel", "Poison"]
         },
-        "evolutions": [439, 122],
+        "evolutions": [122],
         "base_stats": {
             "hp": 40,
             "attack": 45,
@@ -3188,7 +3188,7 @@
             "types": ["Bug", "Flying"],
             "weaknesses": ["Fire", "Flying", "Electric", "Ice", "Rock"]
         },
-        "evolutions": [123, 212],
+        "evolutions": [123],
         "base_stats": {
             "hp": 70,
             "attack": 110,
@@ -3214,7 +3214,7 @@
             "types": ["Ice", "Psychic"],
             "weaknesses": ["Steel", "Ghost", "Fire", "Dark", "Rock", "Bug"]
         },
-        "evolutions": [238, 124],
+        "evolutions": [124],
         "base_stats": {
             "hp": 65,
             "attack": 50,
@@ -3240,7 +3240,7 @@
             "types": ["Electric"],
             "weaknesses": ["Ground"]
         },
-        "evolutions": [239, 125, 466],
+        "evolutions": [125],
         "base_stats": {
             "hp": 65,
             "attack": 83,
@@ -3266,7 +3266,7 @@
             "types": ["Fire"],
             "weaknesses": ["Water", "Ground", "Rock"]
         },
-        "evolutions": [240, 126, 467],
+        "evolutions": [126],
         "base_stats": {
             "hp": 65,
             "attack": 95,
@@ -3552,7 +3552,7 @@
             "types": ["Normal"],
             "weaknesses": ["Fighting"]
         },
-        "evolutions": [137, 233, 474],
+        "evolutions": [137],
         "base_stats": {
             "hp": 65,
             "attack": 60,
@@ -3708,7 +3708,7 @@
             "types": ["Normal"],
             "weaknesses": ["Fighting"]
         },
-        "evolutions": [446, 143],
+        "evolutions": [143],
         "base_stats": {
             "hp": 160,
             "attack": 110,
