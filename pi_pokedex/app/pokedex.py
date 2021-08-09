@@ -64,7 +64,7 @@ class Main(tk.Tk):
     def initialize(self):
         self.frame_by_id = {
             'navigation': lambda master: NavigationFrame(master=master, on_item_select=self.on_nav_item_select),
-            'pokemon_info': lambda master, pokemon: PokemonInfoFrame(master=master, pokemon=pokemon),
+            'pokemon_info': lambda master, pokemon: PokemonInfoFrame(master=master, pokemon=pokemon, navigate_back=self.navigate_back),
         }
 
     def on_nav_item_select(self, item):
@@ -77,6 +77,13 @@ class Main(tk.Tk):
     def show_pokemon_info(self, pokemon):
         self.frame = self.frame_by_id['pokemon_info'](master=self, pokemon=pokemon)
         self.show_current_frame()
+
+    def navigate_back(self):
+        self.frame.destroy()
+        self.frame_stack.pop()
+        self.frame = self.frame_stack[-1]
+        self.frame.tkraise()
+        self.frame.focus_set()
 
     def show_current_frame(self):
         self.frame.grid(column=0, row=0, sticky="nsew")
