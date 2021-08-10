@@ -1,3 +1,4 @@
+from collections import namedtuple
 import math
 
 import tkinter as tk
@@ -6,6 +7,9 @@ import config
 from pokemon import Pokemon
 
 ITEMS_PER_PAGE = 10
+
+
+NavigationEntry = namedtuple("NavigationEntry", "value label")
 
 
 class NavigationItem(tk.Frame):
@@ -66,19 +70,21 @@ class NavigationItem(tk.Frame):
 
 
 class NavigationFrame(tk.Frame):
-    def __init__(self, master=None, on_item_select=None):
+    def __init__(self, master=None, items=None, on_item_select=None, on_back=None):
         super().__init__(master)
         self.master = master
         self.on_item_select = on_item_select
+        self.on_back = on_back
 
         self.event_map = {
             'w': self.handle_up,
             'a': self.handle_left,
             's': self.handle_down,
             'd': self.handle_right,
+            'j': self.handle_back,
             'k': self.handle_select,
         }
-        self.items = Pokemon.all()
+        self.items = items
         self.frames = []
         self.current_page_index = 0
         self.current_page = 0
@@ -106,16 +112,13 @@ class NavigationFrame(tk.Frame):
         if e.char in self.event_map:
             self.event_map[e.char]()
 
-    def on_item_select(self, item):
-        print(item)
-
     def handle_up(self):
         previous_index = self.current_page_index
         render_new_page = False
         if self.current_page_index > 0:
             self.current_page_index -= 1
         elif self.current_page > 0:
-            self.current_page_index = ITEMS_PER_PAGE - 1
+            self.current_page_index = len(self.frames) - 1
             self.current_page -= 1
             render_new_page = True
 
@@ -127,8 +130,8 @@ class NavigationFrame(tk.Frame):
     def handle_down(self):
         previous_index = self.current_page_index
         render_new_page = False
-        if self.current_page_index < ITEMS_PER_PAGE - 1:
-            self.current_page_index += 1;
+        if self.current_page_index < len(self.frames) - 1:
+            self.current_page_index += 1
         elif self.current_page < (self.num_pages - 1):
             self.current_page_index = 0
             self.current_page += 1
@@ -150,8 +153,13 @@ class NavigationFrame(tk.Frame):
             self.current_page += 1
             self.render_page()
 
+    def handle_back(self):
+        if self.on_back is not None:
+            self.on_back()
+
     def handle_select(self):
-        self.on_item_select(self.items[self.current_index]);
+        if self.on_item_select is not None:
+            self.on_item_select(self.items[self.current_index].value)
 
     def render_page(self):
         for frame in self.frames:
@@ -161,11 +169,10 @@ class NavigationFrame(tk.Frame):
         page_items = self.get_items_page(self.current_page)
         for i, item in enumerate(page_items):
             state = 'active' if i == self.current_page_index else 'inactive'
-            name = i
             frame = NavigationItem(
                 master=self,
                 width=config.SCREEN_WIDTH,
-                text=f"[{item.number}] {item.name}",
+                text=item.label,
                 state=state,
             )
             frame.pack(side=tk.TOP)

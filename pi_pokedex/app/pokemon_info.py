@@ -56,9 +56,9 @@ class PokemonInfoFrame(tk.Frame):
         highlighted_pokemon = self.evolution_section.get_highlighted_pokemon()
         if highlighted_pokemon is None or highlighted_pokemon.number == self.pokemon.number:
             return
-            
+
         self.navigate_back()
-        self.show_pokemon_info(highlighted_pokemon)
+        self.show_pokemon_info(highlighted_pokemon.number)
 
     def handle_back(self):
         self.navigate_back()
