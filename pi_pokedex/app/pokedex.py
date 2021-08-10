@@ -35,22 +35,13 @@ class Main(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         self.title('Pokedéx')
         self.geometry(f"{config.SCREEN_WIDTH}x{config.SCREEN_HEIGHT}")
+        self.resizable(False, False)
 
         self.frame_stack = []
 
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
         self.display_splash_and_initialize()
-
-    def configure(self):
-        self.resizable(False, False)
-        self.bind('<KeyPress>', self.onKeyPress)
-
-    def onKeyPress(self, e):
-        print(e)
-        print(e.char)
-        if e.char in self.event_map:
-            self.event_map[e.char]()
 
     def display_splash_and_initialize(self):
         splash_frame = SplashFrame(master=self)

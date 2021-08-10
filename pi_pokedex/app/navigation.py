@@ -91,7 +91,6 @@ class NavigationFrame(tk.Frame):
 
         self.bind('<KeyPress>', self.onKeyPress)
         self.focus_set()
-        self.pack()
 
         self.render_page()
 
