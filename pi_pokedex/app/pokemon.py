@@ -20,6 +20,9 @@ class Pokemon():
 
         self._pokemon_by_number[number] = self
 
+    def __str__(self):
+        return (f"({self.number_string}) {self.name}")
+
     @classmethod
     def all(cls):
         return list(cls._pokemon_by_number.values())

@@ -63,19 +63,27 @@ class Main(tk.Tk):
 
     def initialize(self):
         self.frame_by_id = {
-            'navigation': lambda master: NavigationFrame(master=master, on_item_select=self.on_nav_item_select),
-            'pokemon_info': lambda master, pokemon: PokemonInfoFrame(master=master, pokemon=pokemon, navigate_back=self.navigate_back),
+            'navigation': lambda: NavigationFrame(
+                master=self, 
+                on_item_select=self.on_nav_item_select,
+            ),
+            'pokemon_info': lambda pokemon: PokemonInfoFrame(
+                master=self, 
+                pokemon=pokemon, 
+                navigate_back=self.navigate_back, 
+                show_pokemon_info=self.show_pokemon_info,
+            ),
         }
 
     def on_nav_item_select(self, item):
         self.show_pokemon_info(item)
 
     def show_navigation(self):
-        self.frame = self.frame_by_id['navigation'](master=self)
+        self.frame = self.frame_by_id['navigation']()
         self.show_current_frame()
 
     def show_pokemon_info(self, pokemon):
-        self.frame = self.frame_by_id['pokemon_info'](master=self, pokemon=pokemon)
+        self.frame = self.frame_by_id['pokemon_info'](pokemon=pokemon)
         self.show_current_frame()
 
     def navigate_back(self):
