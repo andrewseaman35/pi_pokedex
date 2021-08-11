@@ -55,7 +55,7 @@ class EventHandlerMixin():
         self._callback = None
         for pin in PIN_EVENT_MAP.keys():
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            GPIO.add_event_detect(pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin))
+            GPIO.add_event_detect(pin, GPIO.RISING, callback=self.on_gpio_event)
 
     def init_event_map(self):
         self.event_map = {}
