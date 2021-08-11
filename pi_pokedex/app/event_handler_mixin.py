@@ -72,3 +72,16 @@ class EventHandlerMixin():
 
     def handle_event(self, event_type):
         self.event_map[event_type]()
+
+    def on_pause(self):
+        for pin in PIN_EVENT_MAP.keys():
+            GPIO.remove_event_detect(pin)
+
+    def on_resume(self):
+        for pin in PIN_EVENT_MAP.keys():
+            GPIO.add_event_detect(pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin))
+
+    def destroy(self):
+        for pin in PIN_EVENT_MAP.keys():
+            GPIO.remove_event_detect(pin)
+        super().destroy()

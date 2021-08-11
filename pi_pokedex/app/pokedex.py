@@ -90,18 +90,26 @@ class Main(tk.Tk):
         self.show_pokemon_info(number)
 
     def show_frame(self, frame_id):
+        if self.frame:
+            self.frame.on_pause()
         self.frame = self.frame_by_id[frame_id]()
         self.show_current_frame()
 
     def show_menu(self):
+        if self.frame:
+            self.frame.on_pause()
         self.frame = self.frame_by_id['menu']()
         self.show_current_frame()
 
     def show_pokemon_selector(self):
+        if self.frame:
+            self.frame.on_pause()
         self.frame = self.frame_by_id['pokemon_selector']()
         self.show_current_frame()
 
     def show_pokemon_info(self, number):
+        if self.frame:
+            self.frame.on_pause()
         pokemon = Pokemon.get_by_number(number)
         self.frame = self.frame_by_id['pokemon_info'](pokemon=pokemon)
         self.show_current_frame()
@@ -116,6 +124,7 @@ class Main(tk.Tk):
         self.frame = self.frame_stack[-1]
         self.frame.tkraise()
         self.frame.focus_set()
+        self.frame.on_resume()
 
     def show_current_frame(self):
         self.frame.grid(column=0, row=0, sticky="nsew")
