@@ -49,7 +49,7 @@ class Main(tk.Tk):
         splash_frame.grid_rowconfigure(0, weight = 1)
         splash_frame.grid_columnconfigure(0, weight = 1)
         splash_frame.tkraise()
-        self.after(config.SPLASH_TIME, self.show_menu)
+        self.after(config.SPLASH_TIME, lambda: self.show_frame('menu'))
         self.frame_stack.append(splash_frame)
         self.initialize()
 
@@ -75,7 +75,7 @@ class Main(tk.Tk):
                 master=self, 
                 pokemon=pokemon, 
                 navigate_back=self.navigate_back, 
-                show_pokemon_info=self.show_pokemon_info,
+                show_pokemon_info=self.on_pokemon_select,
             ),
             'settings': lambda: SettingsFrame(
                 master=self,
@@ -87,38 +87,23 @@ class Main(tk.Tk):
         self.show_frame(frame_id)
 
     def on_pokemon_select(self, number):
-        self.show_pokemon_info(number)
-
-    def show_frame(self, frame_id):
-        if self.frame and hasattr(self.frame, 'on_pause'):
-            self.frame.on_pause()
-        self.frame = self.frame_by_id[frame_id]()
-        self.show_current_frame()
-
-    def show_menu(self):
-        if self.frame and hasattr(self.frame, 'on_pause'):
-            self.frame.on_pause()
-        self.frame = self.frame_by_id['menu']()
-        self.show_current_frame()
-
-    def show_pokemon_selector(self):
-        if self.frame and hasattr(self.frame, 'on_pause'):
-            self.frame.on_pause()
-        self.frame = self.frame_by_id['pokemon_selector']()
-        self.show_current_frame()
-
-    def show_pokemon_info(self, number):
-        if self.frame and hasattr(self.frame, 'on_pause'):
-            self.frame.on_pause()
         pokemon = Pokemon.get_by_number(number)
-        self.frame = self.frame_by_id['pokemon_info'](pokemon=pokemon)
-        self.show_current_frame()
+        self.show_frame('pokemon_info', pokemon=pokemon)
+
+    def show_frame(self, frame_id, **kwargs):
+        if self.frame and hasattr(self.frame, 'on_pause'):
+            self.frame.on_pause()
+        self.frame = self.frame_by_id[frame_id](**kwargs)
+        self.render_current_frame()
 
     def on_return_to_menu(self):
         self.navigate_back()
-        self.show_menu()
+        self.show_frame('menu')
 
     def navigate_back(self):
+        self.destroy_and_render_last()
+
+    def destroy_and_render_last(self):
         self.frame.destroy()
         self.frame_stack.pop()
         self.frame = self.frame_stack[-1]
@@ -126,7 +111,7 @@ class Main(tk.Tk):
         self.frame.focus_set()
         self.frame.on_resume()
 
-    def show_current_frame(self):
+    def render_current_frame(self):
         self.frame.grid(column=0, row=0, sticky="nsew")
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
