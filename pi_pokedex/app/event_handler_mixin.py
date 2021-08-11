@@ -61,7 +61,7 @@ class EventHandlerMixin():
         self.event_map = {}
 
     def on_gpio_event(self, pin):
-        if self._callback is not None:
+        if pin in PIN_EVENT_MAP:
             event = PIN_EVENT_MAP[pin]
             self.handle_event(event)
 
