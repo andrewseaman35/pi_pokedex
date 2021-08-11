@@ -90,25 +90,25 @@ class Main(tk.Tk):
         self.show_pokemon_info(number)
 
     def show_frame(self, frame_id):
-        if self.frame:
+        if self.frame and hasattr(self.frame, 'on_pause'):
             self.frame.on_pause()
         self.frame = self.frame_by_id[frame_id]()
         self.show_current_frame()
 
     def show_menu(self):
-        if self.frame:
+        if self.frame and hasattr(self.frame, 'on_pause'):
             self.frame.on_pause()
         self.frame = self.frame_by_id['menu']()
         self.show_current_frame()
 
     def show_pokemon_selector(self):
-        if self.frame:
+        if self.frame and hasattr(self.frame, 'on_pause'):
             self.frame.on_pause()
         self.frame = self.frame_by_id['pokemon_selector']()
         self.show_current_frame()
 
     def show_pokemon_info(self, number):
-        if self.frame:
+        if self.frame and hasattr(self.frame, 'on_pause'):
             self.frame.on_pause()
         pokemon = Pokemon.get_by_number(number)
         self.frame = self.frame_by_id['pokemon_info'](pokemon=pokemon)
