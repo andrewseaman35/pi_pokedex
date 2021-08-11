@@ -5,6 +5,15 @@ import tkinter as tk
 
 import config
 from pokemon import Pokemon
+from event_handler_mixin import (
+    EventHandlerMixin,
+    EVENT_UP,
+    EVENT_DOWN,
+    EVENT_LEFT,
+    EVENT_RIGHT,
+    EVENT_BACK,
+    EVENT_SELECT,
+)
 
 ITEMS_PER_PAGE = 10
 
@@ -69,7 +78,7 @@ class NavigationItem(tk.Frame):
         self.canvas.update()
 
 
-class NavigationFrame(tk.Frame):
+class NavigationFrame(EventHandlerMixin, tk.Frame):
     def __init__(self, master=None, items=None, on_item_select=None, on_back=None):
         super().__init__(master)
         self.master = master
@@ -77,21 +86,19 @@ class NavigationFrame(tk.Frame):
         self.on_back = on_back
 
         self.event_map = {
-            'w': self.handle_up,
-            'a': self.handle_left,
-            's': self.handle_down,
-            'd': self.handle_right,
-            'j': self.handle_back,
-            'k': self.handle_select,
+            EVENT_UP: self.handle_up,
+            EVENT_LEFT: self.handle_left,
+            EVENT_DOWN: self.handle_down,
+            EVENT_RIGHT: self.handle_right,
+            EVENT_BACK: self.handle_back,
+            EVENT_SELECT: self.handle_select,
         }
         self.items = items
         self.frames = []
         self.current_page_index = 0
         self.current_page = 0
 
-        self.bind('<KeyPress>', self.onKeyPress)
         self.focus_set()
-
         self.render_page()
 
     @property
@@ -106,10 +113,6 @@ class NavigationFrame(tk.Frame):
         start_index = page_index * ITEMS_PER_PAGE
         end_index = start_index + ITEMS_PER_PAGE
         return self.items[start_index: end_index]
-
-    def onKeyPress(self, e):
-        if e.char in self.event_map:
-            self.event_map[e.char]()
 
     def handle_up(self):
         previous_index = self.current_page_index

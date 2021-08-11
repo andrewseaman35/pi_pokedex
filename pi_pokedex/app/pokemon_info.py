@@ -1,13 +1,21 @@
 import tkinter as tk
 
 import config
+from event_handler_mixin import (
+    EventHandlerMixin,
+    EVENT_LEFT,
+    EVENT_RIGHT,
+    EVENT_SELECT,
+    EVENT_BACK,
+)
+
 from widgets.info_header import InfoHeader
 from widgets.stats_section import StatsSection
 from widgets.description_section import DescriptionSection
 from widgets.evolution_section import EvolutionSection
 
 
-class PokemonInfoFrame(tk.Frame):
+class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
     def __init__(self, master=None, pokemon=None, navigate_back=None, show_pokemon_info=None):
         super().__init__(master)
         self.master = master
@@ -16,15 +24,14 @@ class PokemonInfoFrame(tk.Frame):
         self.show_pokemon_info = show_pokemon_info
 
         self.event_map = {
-            'a': self.handle_left,
-            'd': self.handle_right,
-            'k': self.handle_select,
-            'j': self.handle_back,
+            EVENT_LEFT: self.handle_left,
+            EVENT_RIGHT: self.handle_right,
+            EVENT_SELECT: self.handle_select,
+            EVENT_BACK: self.handle_back,
         }
 
         self.render()
         self.focus_set()
-        self.bind('<KeyPress>', self.onKeyPress)
 
         print(self.pokemon.__dict__)
         
@@ -41,10 +48,6 @@ class PokemonInfoFrame(tk.Frame):
         
         # Force the fame to be full width
         self.evolution_section.pack_propagate(0)
-
-    def onKeyPress(self, e):
-        if e.char in self.event_map:
-            self.event_map[e.char]()
 
     def handle_left(self):
         self.evolution_section.handle_left()
