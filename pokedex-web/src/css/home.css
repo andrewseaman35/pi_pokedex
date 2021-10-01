@@ -1,0 +1,44 @@
+.home-main-menu {
+    display: flex;
+    justify-content: center;
+    padding-top: 48px;
+}
+
+.home-menu-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 8px; 
+
+    width: 110px;
+    height: 110px;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+}
+
+.home-menu-item > img {
+    width: 60px;
+    height: 60px;
+}
+
+.home-menu-item > .label {
+    margin-top: 8px;
+    color: #000000;
+
+}
+
+.home-settings-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 42px;
+}
+
+.home-settings-link {
+    width: 237px;
+    height: 26px;
+    background-color: #EEEEEE;
+    border-radius: 4px;
+    text-align: center;
+    line-height: 26px
+}
