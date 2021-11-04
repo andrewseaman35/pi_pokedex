@@ -1,9 +1,4 @@
 import React from "react";
-import {
-  Link,
-} from "react-router-dom";
-
-import { POKEMON_BY_ID  } from "../js/pokemon";
 
 const READABLE_KEY_MAP = {
     special_attack: 'Sp. Atk.',
