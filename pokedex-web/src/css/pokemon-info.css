@@ -1,0 +1,85 @@
+.pokemon-info {
+    padding: 10px;
+}
+
+.pokemon-info-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pokemon-info-header .header-left {
+
+}
+
+.pokemon-info-header .info-number {
+    font-size: 14px;
+}
+
+.pokemon-info-header .info-name {
+    font-size: 18px;
+    font-weight:bold;
+}
+
+.pokemon-info-body {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+}
+
+.pokemon-stats-table {
+    margin-top: 4px;
+}
+
+.pokemon-stats-table .key-cell {
+    min-width: 42px;
+}
+
+.pokemon-stats-table .value-cell {
+    max-width: 50px;
+    white-space: nowrap;
+}
+
+.pokemon-stats-table .value-ability {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 55px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.pokemon-stats-table .value-category {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 55px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.pokemon-info-description {
+    margin: 4px 0;
+    height: 50px;
+}
+
+.pokemon-image {
+    height: 110px;
+    width: 110px;
+}
+
+.pokemon-info-evolution {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    background-color: #EEEEEE;
+    margin: 0 -10px -10px -10px;
+}
+
+.pokemon-info-evolution .evolution-selected {
+    font-weight: 900;
+}
+
+.pokemon-info-evolution .evolution {
+    font-weight: 400;
+}

@@ -6,6 +6,8 @@ import {
   useLocation
 } from "react-router-dom";
 import Home from "./views/Home";
+import PokemonListPage from "./views/PokemonListPage";
+import PokemonInfoPage from "./views/PokemonInfoPage";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -19,8 +21,11 @@ export default function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/users">
-            <Users name={query.get("name")} />
+          <Route path="/list">
+            <PokemonListPage page={query.get("page")} />
+          </Route>
+          <Route path="/pokemon">
+            <PokemonInfoPage id={Number(query.get("id"))} />
           </Route>
           <Route path="/">
             <Home />
@@ -32,8 +37,4 @@ export default function App() {
 
 function About() {
   return <h2>About</h2>;
-}
-
-function Users({ name }) {
-  return <h2>Users {name} </h2>;
 }
