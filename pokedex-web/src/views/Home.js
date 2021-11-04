@@ -7,7 +7,7 @@ import {
 const Home = () => (
     <div class="application-container">
         <div class="home-main-menu">
-            <Link to="/list?page=0">
+            <Link to="/list/0">
                 <div class="home-menu-item">
                     <img alt="" src={process.env.PUBLIC_URL + '/img/home/icon_pokeball.png'}></img>
                     <div>Pokémon</div>

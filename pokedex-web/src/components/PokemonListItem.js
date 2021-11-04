@@ -9,7 +9,7 @@ import {
 
 
 const PokemonListItem = ({pokemon}) => (
-    <Link to={`/pokemon?id=${pokemon.number}`}>
+    <Link to={`/pokemon/${pokemon.number}`}>
         <div className="pokemon-item">
             <div>{toReadableNumber(pokemon.number)} <b>{pokemon.name}</b></div>
         </div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 
 import { POKEMON_BY_ID } from "../js/pokemon";
 import TypeBadge from "../components/TypeBadge";
@@ -16,17 +17,10 @@ const STAT_KEYS = ['category', 'abilities', 'height', 'weight', 'gender'];
 const BASE_STAT_KEYS = ['attack', 'defense', 'hp', 'special_attack', 'special_defense', 'speed'];
 
 
-const PokemonInfoPage = ({id}) => {
-    const [pokemonNumber, setPokemonNumber] = useState(id);
-
-    useEffect(() => {
-        console.log(id)
-        setPokemonNumber(id);
-      }, [id]);
+const PokemonInfoPage = () => {
+    const pokemonNumber = useLocation()['pathname'].split("/")[2];
     const pokemon = POKEMON_BY_ID[pokemonNumber];
 
-    console.log(pokemon);
-    console.log(pokemon.evolutions);
     return (
         <div className="application-container">
             <div className="pokemon-info">

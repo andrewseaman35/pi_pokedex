@@ -16,7 +16,7 @@ const PokemonEvolutionBar = ({pokemon}) => (
                             pokemonNumber === pokemon.number ? (
                                 <div className='evolution-selected'>{POKEMON_BY_ID[pokemonNumber].name}</div>
                             ) : (
-                                <Link to={`/pokemon?id=${pokemonNumber}`}>
+                                <Link to={`/pokemon/${pokemonNumber}`}>
                                     <div className='evolution'>{POKEMON_BY_ID[pokemonNumber].name}</div>
                                 </Link>
                             )
