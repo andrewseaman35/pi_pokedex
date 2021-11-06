@@ -17,6 +17,10 @@
     border-radius: 4px;
 }
 
+.home-menu-item.active {
+    border: 1px solid #222222;
+}
+
 .home-menu-item > img {
     width: 60px;
     height: 60px;

@@ -59,6 +59,11 @@ const PokemonListPage = () => {
         history.push(`/pokemon/${(pageNumber * PAGE_SIZE) + activeIndex + 1}`);
     });
 
+    window.pi_pokedex.keyboardManager.onBack(() => {
+        window.pi_pokedex.keyboardManager.clear();
+        history.push("/home");
+    });
+
     return (
         <div className="application-container">
             <PokemonList items={pokemonBatch} activeIndex={activeIndex} />
