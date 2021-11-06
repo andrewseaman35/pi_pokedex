@@ -46,3 +46,7 @@
     text-align: center;
     line-height: 26px
 }
+
+.home-settings-link.active {
+    border: 1px solid #222222;
+}

@@ -61,7 +61,7 @@ const PokemonListPage = () => {
 
     window.pi_pokedex.keyboardManager.onBack(() => {
         window.pi_pokedex.keyboardManager.clear();
-        history.push("/home");
+        history.push("/home/0");
     });
 
     return (
