@@ -18,7 +18,7 @@ const toReadableValue = (key, value) => {
             <React.Fragment>
                 {
                     value.map((ability, i) => (
-                        <React.Fragment>
+                        <React.Fragment key={i}>
                             <span className="value-ability">
                                 {ability}
                             </span>
@@ -44,7 +44,7 @@ const PokemonStatsTable = ({stats, keys, extraClasses}) => (
             <tbody>
                 {
                     keys.map((key) => (
-                        <tr>
+                        <tr key={key}>
                             <td className="key-cell">{toReadableKey(key)}</td>
                             <td className="value-cell"><b>{toReadableValue(key, stats[key])}</b></td>
                         </tr>

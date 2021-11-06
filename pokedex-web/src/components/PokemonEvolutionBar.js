@@ -10,7 +10,7 @@ const PokemonEvolutionBar = ({pokemon}) => (
     <div className="pokemon-info-evolution">
         {
             pokemon.evolutions.map((pokemonNumber, i) => (
-                <React.Fragment>
+                <React.Fragment key={i}>
                     <React.Fragment>
                         {
                             pokemonNumber === pokemon.number ? (

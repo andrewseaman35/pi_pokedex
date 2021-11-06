@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
 import { POKEMON_BY_ID } from "../js/pokemon";
 import TypeBadge from "../components/TypeBadge";
@@ -12,14 +12,23 @@ import {
 } from "../js/utils";
 
 import '../css/pokemon-info.css';
+import { PAGE_SIZE } from "../js/constants";
 
 const STAT_KEYS = ['category', 'abilities', 'height', 'weight', 'gender'];
 const BASE_STAT_KEYS = ['attack', 'defense', 'hp', 'special_attack', 'special_defense', 'speed'];
 
 
 const PokemonInfoPage = () => {
+    const history = useHistory();
     const pokemonNumber = useLocation()['pathname'].split("/")[2];
     const pokemon = POKEMON_BY_ID[pokemonNumber];
+
+    window.pi_pokedex.keyboardManager.onBack(() => {
+        const pageNumber = Math.floor(pokemon.number / PAGE_SIZE);
+        const activeIndex = (pokemon.number % PAGE_SIZE) - 1;
+        window.pi_pokedex.keyboardManager.clear();
+        history.push(`/list/${pageNumber}/${activeIndex}`);
+    });
 
     return (
         <div className="application-container">
