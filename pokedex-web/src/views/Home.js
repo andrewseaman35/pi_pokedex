@@ -3,29 +3,31 @@ import {
   Link,
 } from "react-router-dom";
 
+import HomeMenuItem from '../components/HomeMenuItem';
 
-const Home = () => (
-    <div class="application-container">
-        <div class="home-main-menu">
-            <Link to="/list/0">
-                <div class="home-menu-item">
-                    <img alt="" src={process.env.PUBLIC_URL + '/img/home/icon_pokeball.png'}></img>
-                    <div>Pokémon</div>
-                </div>
-            </Link>
-            <Link to="/users">
-                <div class="home-menu-item">
-                    <img alt="" src={process.env.PUBLIC_URL + '/img/home/icon_camera.png'}></img>
-                    <div>Camera</div>
-                </div>
-            </Link>
+const Home = () => {
+    return (
+        <div className="application-container">
+            <div className="home-main-menu">
+                <HomeMenuItem 
+                    href="/list/0"
+                    icon="icon_pokeball"
+                    label="Pokémon"
+                    state="active"
+                ></HomeMenuItem>
+                <HomeMenuItem 
+                    href="/users"
+                    icon="icon_camera"
+                    label="Camera"
+                ></HomeMenuItem>
+            </div>
+            <div className="home-settings-container">
+                <Link to="/settings">
+                    <div className="home-settings-link">Settings</div>
+                </Link>
+            </div>
         </div>
-        <div class="home-settings-container">
-            <Link to="/settings">
-                <div class="home-settings-link">Settings</div>
-            </Link>
-        </div>
-    </div>
-);
+    )
+};
 
 export default Home;

@@ -1,10 +1,15 @@
 .pokemon-list {
-    padding: 10px;
     overflow: hidden;
-    height: 232px;
+    height: inherit;
 }
 
 .pokemon-list .pokemon-item {
     font-size: 14px;
-    margin-bottom: 8px;
+    padding: 4px;
+    margin-bottom: 1px;
+}
+
+.pokemon-list .pokemon-item:hover,
+.pokemon-list .pokemon-item.active {
+    background-color: #CCCCCC;
 }
