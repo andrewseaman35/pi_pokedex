@@ -20,14 +20,41 @@ const BASE_STAT_KEYS = ['attack', 'defense', 'hp', 'special_attack', 'special_de
 
 const PokemonInfoPage = () => {
     const history = useHistory();
-    const pokemonNumber = useLocation()['pathname'].split("/")[2];
+    const pokemonNumber = Number(useLocation()['pathname'].split("/")[2]);
+    const activeEvolutionIndexStr = useLocation()['pathname'].split("/")[3];
+    const activeEvolutionIndex = Number(activeEvolutionIndexStr);
     const pokemon = POKEMON_BY_ID[pokemonNumber];
+
+    const validEvolutionIndexes = new Set([...Array(pokemon.evolutions.length).keys()]);
+    const selectedPokemonIndex = pokemon.evolutions.indexOf(pokemonNumber);
+
+    // TODO: eevee...
+    if (activeEvolutionIndexStr === '' || !validEvolutionIndexes.has(activeEvolutionIndex)) {
+        history.push(`/pokemon/${pokemonNumber}/${selectedPokemonIndex > 0 ? selectedPokemonIndex : 0}`);
+    }
 
     window.pi_pokedex.keyboardManager.onBack(() => {
         const pageNumber = Math.floor(pokemon.number / PAGE_SIZE);
         const activeIndex = (pokemon.number % PAGE_SIZE) - 1;
         window.pi_pokedex.keyboardManager.clear();
         history.push(`/list/${pageNumber}/${activeIndex}`);
+    });
+
+    window.pi_pokedex.keyboardManager.onEnter(() => {
+        const selectedPokemonNumber = pokemon.evolutions[activeEvolutionIndex];
+        history.push(`/pokemon/${selectedPokemonNumber}/${activeEvolutionIndex}`);
+    });
+
+    window.pi_pokedex.keyboardManager.onArrowRight(() => {
+        if (activeEvolutionIndex < (pokemon.evolutions.length - 1)) {
+            history.push(`/pokemon/${pokemonNumber}/${activeEvolutionIndex + 1}`)
+        }
+    });
+
+    window.pi_pokedex.keyboardManager.onArrowLeft(() => {
+        if (activeEvolutionIndex > 0) {
+            history.push(`/pokemon/${pokemonNumber}/${activeEvolutionIndex - 1}`)
+        }
     });
 
     return (
@@ -48,7 +75,7 @@ const PokemonInfoPage = () => {
                 <div className="pokemon-info-description">
                     {pokemon.red_description}
                 </div>
-                <PokemonEvolutionBar pokemon={pokemon} />
+                <PokemonEvolutionBar pokemon={pokemon} activeIndex={activeEvolutionIndex} />
             </div>
         </div>
     )

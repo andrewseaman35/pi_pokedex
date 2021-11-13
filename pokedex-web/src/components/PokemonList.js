@@ -5,7 +5,6 @@ import PokemonListItem from './PokemonListItem';
 
 
 const PokemonList = ({items, activeIndex}) => {
-    console.log(window)
     return (
         <div className="pokemon-list">
             {

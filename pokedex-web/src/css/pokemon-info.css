@@ -76,10 +76,22 @@
     margin: 0 -10px -10px -10px;
 }
 
+.pokemon-info-evolution .no-evolutions {
+    font-style: italic;;
+}
+
 .pokemon-info-evolution .evolution-selected {
     font-weight: 900;
 }
 
 .pokemon-info-evolution .evolution {
     font-weight: 400;
+}
+
+.pokemon-info-evolution .evolution-selected.active {
+    text-decoration: underline;
+}
+
+.pokemon-info-evolution .evolution.active {
+    text-decoration: underline;
 }

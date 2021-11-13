@@ -21,7 +21,6 @@ class KeyboardManager {
 
     initEventHandler() {
         window.addEventListener('keydown', (e) => {
-            console.log(`${e.key}`);
             if ((e.key) in this.handlers) {
                 this.handlers[e.key]();
             }

@@ -13,7 +13,6 @@ const toReadableValue = (key, value) => {
     if (key === 'category') {
         return value[0].toUpperCase() + value.substring(1);
     } else if (key === 'abilities') {
-        console.log(value);
         return (
             <React.Fragment>
                 {

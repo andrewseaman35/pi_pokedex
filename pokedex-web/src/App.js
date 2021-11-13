@@ -2,6 +2,7 @@ import React from "react";
 import {
     BrowserRouter as Router,
     Switch,
+    Redirect,
     Route,
 } from "react-router-dom";
 import Home from "./views/Home";
@@ -24,8 +25,11 @@ export default function App() {
                 <Route path="/pokemon">
                     <PokemonInfoPage />
                 </Route>
-                <Route path="/">
+                <Route path="/home">
                     <Home />
+                </Route>
+                <Route path="/">
+                    <Redirect to="/home/0" />
                 </Route>
             </Switch>
         </Router>
