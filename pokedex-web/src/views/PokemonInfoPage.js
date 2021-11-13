@@ -28,7 +28,7 @@ const PokemonInfoPage = () => {
     const validEvolutionIndexes = new Set([...Array(pokemon.evolutions.length).keys()]);
     const selectedPokemonIndex = pokemon.evolutions.indexOf(pokemonNumber);
 
-    // TODO: eevee...
+    // TODO: eevee....
     if (activeEvolutionIndexStr === '' || !validEvolutionIndexes.has(activeEvolutionIndex)) {
         history.push(`/pokemon/${pokemonNumber}/${selectedPokemonIndex > 0 ? selectedPokemonIndex : 0}`);
     }
