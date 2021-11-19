@@ -47,6 +47,9 @@ const Home = () => {
         if (activeItem === ITEM_KEYS.LIST) {
             window.pi_pokedex.keyboardManager.clear();
             history.push(`/list/0/0`);
+        } else if (activeItem === ITEM_KEYS.SETTINGS) {
+            window.pi_pokedex.keyboardManager.clear();
+            history.push(`/settings/0/0`);
         }
     })
 

@@ -10,10 +10,11 @@ import Home from "./views/Home";
 import ListPage from "./views/ListPage";
 import PokemonInfoPage from "./views/PokemonInfoPage";
 import PokemonList from "./components/PokemonList";
+import SettingsList from "./components/SettingsList";
 
 import KeyboardManager from "./js/keyboardManager";
 import { POKEMON } from "./js/pokemon";
-import { PAGE_SIZE } from "./js/constants";
+import { PAGE_SIZE, SETTINGS_ITEMS } from "./js/constants";
 
 
 export default function App() {
@@ -28,10 +29,19 @@ export default function App() {
                         ListComponent={PokemonList}
                         items={POKEMON}
                         pageSize={PAGE_SIZE}
+                        selectBasePage="pokemon"
                     />
                 </Route>
                 <Route path="/pokemon">
                     <PokemonInfoPage />
+                </Route>
+                <Route path="/settings">
+                    <ListPage
+                        ListComponent={SettingsList}
+                        items={SETTINGS_ITEMS}
+                        pageSize={PAGE_SIZE}
+                        selectBasePage={null}
+                    />
                 </Route>
                 <Route path="/home">
                     <Home />
