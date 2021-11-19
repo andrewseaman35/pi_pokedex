@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { Redirect, useLocation, useHistory } from "react-router-dom";
 
 import { POKEMON_BY_ID } from "../js/pokemon";
 import TypeBadge from "../components/TypeBadge";
@@ -30,7 +30,7 @@ const PokemonInfoPage = () => {
 
     // TODO: eevee....
     if (activeEvolutionIndexStr === '' || !validEvolutionIndexes.has(activeEvolutionIndex)) {
-        history.push(`/pokemon/${pokemonNumber}/${selectedPokemonIndex > 0 ? selectedPokemonIndex : 0}`);
+        return <Redirect to={`/pokemon/${pokemonNumber}/${selectedPokemonIndex > 0 ? selectedPokemonIndex : 0}`} />
     }
 
     window.pi_pokedex.keyboardManager.onBack(() => {

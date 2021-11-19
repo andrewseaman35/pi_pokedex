@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Link,
-  useLocation, 
+  useLocation,
   useHistory,
 } from "react-router-dom";
 
@@ -20,17 +20,31 @@ const Home = () => {
     const activeItem = Number(path.split("/")[2]);
 
     window.pi_pokedex.keyboardManager.onArrowLeft(() => {
-        const newItem = activeItem === 0 ? 2 : (activeItem - 1);
-        history.push(`/home/${newItem}`);
+        if (activeItem === ITEM_KEYS.CAMERA) {
+            history.push(`/home/${ITEM_KEYS.LIST}`);
+        }
     });
 
     window.pi_pokedex.keyboardManager.onArrowRight(() => {
-        const newItem = activeItem === 2 ? 0 : (activeItem + 1);
-        history.push(`/home/${newItem}`);
+        if (activeItem === ITEM_KEYS.LIST) {
+            history.push(`/home/${ITEM_KEYS.CAMERA}`);
+        }
+    });
+
+    window.pi_pokedex.keyboardManager.onArrowDown(() => {
+        if (activeItem === ITEM_KEYS.LIST || activeItem === ITEM_KEYS.CAMERA) {
+            history.push(`/home/${ITEM_KEYS.SETTINGS}`);
+        }
+    });
+
+    window.pi_pokedex.keyboardManager.onArrowUp(() => {
+        if (activeItem === ITEM_KEYS.SETTINGS) {
+            history.push(`/home/${ITEM_KEYS.LIST}`);
+        }
     });
 
     window.pi_pokedex.keyboardManager.onEnter(() => {
-        if (activeItem === 0) {
+        if (activeItem === ITEM_KEYS.LIST) {
             window.pi_pokedex.keyboardManager.clear();
             history.push(`/list/0/0`);
         }
@@ -40,13 +54,13 @@ const Home = () => {
     return (
         <div className="application-container">
             <div className="home-main-menu">
-                <HomeMenuItem 
+                <HomeMenuItem
                     href="/list/0/0"
                     icon="icon_pokeball"
                     label="Pokémon"
                     state={`${activeItem === ITEM_KEYS.LIST ? STATES.ACTIVE : null}`}
                 ></HomeMenuItem>
-                <HomeMenuItem 
+                <HomeMenuItem
                     href="/users"
                     icon="icon_camera"
                     label="Camera"

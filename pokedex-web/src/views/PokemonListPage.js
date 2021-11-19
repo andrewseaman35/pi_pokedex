@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { Redirect, useLocation, useHistory } from "react-router-dom";
 
 import { MAX_PAGE, PAGE_SIZE } from "../js/constants";
 import { POKEMON } from "../js/pokemon";
@@ -13,15 +13,15 @@ const PokemonListPage = () => {
     const path = useLocation()['pathname'];
     const pageNumber = Number(path.split("/")[2]);
     if (pageNumber < 0) {
-        history.push("/list/0/0");
+        return <Redirect to="/list/0/0" />
     } else if (pageNumber > MAX_PAGE) {
-        history.push(`/list/${MAX_PAGE}/0`);
+        return <Redirect to={`/list/${MAX_PAGE}/0`} />
     }
     const activeIndex = Number(path.split("/")[3]);
     if (activeIndex < 0) {
-        history.push(`/list/${pageNumber}/0`);
+        return <Redirect to={`/list/${pageNumber}/0`} />
     } else if (activeIndex > (PAGE_SIZE - 1)) {
-        history.push(`/list/${pageNumber}/${PAGE_SIZE - 1}`);
+        return <Redirect to={`/list/${pageNumber}/${PAGE_SIZE - 1}`} />
     }
 
     const lowIndex = pageNumber * PAGE_SIZE;

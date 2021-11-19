@@ -5,6 +5,7 @@ import {
     Redirect,
     Route,
 } from "react-router-dom";
+
 import Home from "./views/Home";
 import PokemonListPage from "./views/PokemonListPage";
 import PokemonInfoPage from "./views/PokemonInfoPage";
