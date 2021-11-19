@@ -7,10 +7,13 @@ import {
 } from "react-router-dom";
 
 import Home from "./views/Home";
-import PokemonListPage from "./views/PokemonListPage";
+import ListPage from "./views/ListPage";
 import PokemonInfoPage from "./views/PokemonInfoPage";
+import PokemonList from "./components/PokemonList";
 
 import KeyboardManager from "./js/keyboardManager";
+import { POKEMON } from "./js/pokemon";
+import { PAGE_SIZE } from "./js/constants";
 
 
 export default function App() {
@@ -21,7 +24,11 @@ export default function App() {
         <Router>
             <Switch>
                 <Route path="/list">
-                    <PokemonListPage />
+                    <ListPage
+                        ListComponent={PokemonList}
+                        items={POKEMON}
+                        pageSize={PAGE_SIZE}
+                    />
                 </Route>
                 <Route path="/pokemon">
                     <PokemonInfoPage />
