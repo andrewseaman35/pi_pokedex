@@ -30,11 +30,19 @@ class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
             EVENT_BACK: self.handle_back,
         }
 
+        self.configure(
+            borderwidth=0,
+            background=config.BACKGROUND_COLOR,
+            highlightbackground=config.BACKGROUND_COLOR,
+            highlightthickness=0,
+            bg=config.BACKGROUND_COLOR,
+        )
+
         self.render()
         self.focus_set()
 
         print(self.pokemon.__dict__)
-        
+
     def render(self):
         header = InfoHeader(self, self.pokemon)
         stats = StatsSection(self, self.pokemon)
@@ -45,7 +53,7 @@ class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
         stats.pack(side=tk.TOP, padx=10)
         description.pack(side=tk.TOP)
         self.evolution_section.pack(side=tk.TOP, expand=True)
-        
+
         # Force the fame to be full width
         self.evolution_section.pack_propagate(0)
 

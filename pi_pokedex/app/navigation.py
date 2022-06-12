@@ -85,6 +85,14 @@ class NavigationFrame(EventHandlerMixin, tk.Frame):
         self.on_item_select = on_item_select
         self.on_back = on_back
 
+        self.configure(
+            borderwidth=0,
+            background=config.BACKGROUND_COLOR,
+            highlightbackground=config.BACKGROUND_COLOR,
+            highlightthickness=0,
+            bg=config.BACKGROUND_COLOR,
+        )
+
         self.event_map = {
             EVENT_UP: self.handle_up,
             EVENT_LEFT: self.handle_left,

@@ -15,14 +15,23 @@ class EvolutionSectionItem(tk.Frame):
         if italic:
             font_modifiers.append('Italic')
 
+        self.configure(
+            borderwidth=0,
+            background=config.EVOLUTION_BACKGROUND,
+            highlightbackground=config.EVOLUTION_BACKGROUND,
+            highlightthickness=0,
+            bg=config.EVOLUTION_BACKGROUND,
+        )
+
         typeface = f"{config.TYPEFACE} { ' '.join(font_modifiers)}"
         self.label = tk.Label(
-            self, 
-            text=text, 
-            font=(typeface, size), 
-            anchor=tk.W, 
+            self,
+            text=text,
+            font=(typeface, size),
+            anchor=tk.W,
             justify=justify,
             bg=config.EVOLUTION_BACKGROUND,
+            fg=config.BLACK,
         )
 
         if underline:
@@ -30,7 +39,11 @@ class EvolutionSectionItem(tk.Frame):
             font.configure(underline=True)
             self.label.configure(font=font)
 
-        self.label.pack(side=tk.LEFT)
+        self.label.pack(
+            side=tk.LEFT,
+            # padx=10,
+            pady=(0, 4),
+        )
 
     def set_font_modifiers(self, underline=False):
         font = tk_font.Font(self.label, self.label.cget("font"))
@@ -72,6 +85,7 @@ class EvolutionSection(tk.Frame):
             width=config.SCREEN_WIDTH,
             height=config.EVOLUTION_HEIGHT,
             borderwidth=0,
+            bg=config.EVOLUTION_BACKGROUND,
             background=config.EVOLUTION_BACKGROUND,
             highlightbackground=config.EVOLUTION_BACKGROUND,
             highlightthickness=0,
@@ -83,6 +97,7 @@ class EvolutionSection(tk.Frame):
             width=config.SCREEN_WIDTH,
             height=config.EVOLUTION_HEIGHT,
             borderwidth=0,
+            bg=config.EVOLUTION_BACKGROUND,
             background=config.EVOLUTION_BACKGROUND,
             highlightbackground=config.EVOLUTION_BACKGROUND,
             highlightthickness=0,
@@ -98,7 +113,7 @@ class EvolutionSection(tk.Frame):
                 self.item_frames.append(evolution_item)
 
                 if not is_last:
-                    EvolutionSectionItem(inner, ">", size=16, justify=tk.CENTER).pack(side=tk.LEFT, padx=10)
+                    EvolutionSectionItem(inner, ">", size=14, justify=tk.CENTER).pack(side=tk.LEFT, padx=10)
         else:
             EvolutionSectionItem(inner, "No evolutions", italic=True).pack(side=tk.LEFT, pady=(4, 0))
 

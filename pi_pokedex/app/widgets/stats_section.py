@@ -7,7 +7,7 @@ import config
 
 
 STAT_LABEL_BY_KEY = {
-    'special_attack': 'Sp. Atk', 
+    'special_attack': 'Sp. Atk',
     'special_defense': 'Sp. Def',
 }
 
@@ -32,10 +32,14 @@ class PokemonImage(tk.Frame):
         return f"./assets/img/pokemon/{self.pokemon}.png"
 
     def render_image(self):
-        im = PIL.Image.open(self.filepath).convert('RGB')
+        im = PIL.Image.open(self.filepath).convert('RGBA')
         im.thumbnail(self.image_size)
         photo = PIL.ImageTk.PhotoImage(im)
-        label = tk.Label(self.master, image=photo)
+        label = tk.Label(
+            self.master,
+            image=photo,
+            bg=config.EVOLUTION_BACKGROUND,
+        )
         label.image = photo
         label.pack(side=tk.LEFT)
 
@@ -50,6 +54,7 @@ class StatsColumn(tk.Frame):
             background=config.BACKGROUND_COLOR,
             highlightbackground=config.BACKGROUND_COLOR,
             highlightthickness=0,
+            bg=config.BACKGROUND_COLOR,
         )
 
         for i, key in enumerate(keys):
@@ -58,20 +63,24 @@ class StatsColumn(tk.Frame):
             value = value_to_display_func(data[key])
 
             label_element = tk.Label(
-                self, 
-                text=label, 
-                font=(config.TYPEFACE, 9), 
-                anchor=tk.W, 
+                self,
+                text=label,
+                bg=config.BACKGROUND_COLOR,
+                fg=config.BLACK,
+                font=(config.TYPEFACE, 9),
+                anchor=tk.W,
                 justify=tk.LEFT,
                 width=label_chars,
             )
             label_element.grid(column=0, row=i)
 
             value_element = tk.Label(
-                self, 
-                text=value, 
-                font=(f"{config.TYPEFACE} Bold", 9), 
-                anchor=value_anchor, 
+                self,
+                text=value,
+                bg=config.BACKGROUND_COLOR,
+                fg=config.BLACK,
+                font=(f"{config.TYPEFACE} Bold", 9),
+                anchor=value_anchor,
                 justify=tk.LEFT,
                 wraplength=70,
                 width=value_chars,
@@ -87,20 +96,27 @@ class StatsTable(tk.Frame):
 
     def __init__(self, master, pokemon):
         super().__init__(master)
+
+        self.configure(
+            borderwidth=0,
+            background=config.BACKGROUND_COLOR,
+            highlightbackground=config.BACKGROUND_COLOR,
+            highlightthickness=0,
+        )
         self.stats_column = StatsColumn(
-            master=self, 
-            label_chars=config.STATS_LABEL_CHARS, 
-            value_chars=config.STATS_VALUE_CHARS, 
+            master=self,
+            label_chars=config.STATS_LABEL_CHARS,
+            value_chars=config.STATS_VALUE_CHARS,
             value_anchor=tk.W,
-            data=pokemon.stats, 
+            data=pokemon.stats,
             keys=self.stat_keys,
         )
         self.base_stats_column = StatsColumn(
-            master=self, 
-            label_chars=config.BASE_STATS_LABEL_CHARS, 
-            value_chars=config.BASE_STATS_VALUE_CHARS, 
+            master=self,
+            label_chars=config.BASE_STATS_LABEL_CHARS,
+            value_chars=config.BASE_STATS_VALUE_CHARS,
             value_anchor=tk.E,
-            data=pokemon.base_stats, 
+            data=pokemon.base_stats,
             keys=self.base_stat_keys,
         )
 
@@ -110,7 +126,7 @@ class StatsSection(tk.Frame):
         super().__init__(master)
         self.master = master
         self.pokemon = pokemon
-        
+
         self.configure(
             width=config.SCREEN_WIDTH,
             height=config.STATS_HEIGHT,

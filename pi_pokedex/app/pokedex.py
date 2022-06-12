@@ -6,6 +6,8 @@ import tkinter as tk
 import config
 from pokemon import Pokemon
 
+from frames.home import HomeFrame
+
 from navigation import NavigationFrame, NavigationEntry
 from settings import SettingsFrame
 from pokemon_info import PokemonInfoFrame
@@ -23,9 +25,9 @@ class SplashFrame(tk.Frame):
     def render_image(self):
         im = PIL.Image.open("./assets/img/pokemon_logo_3x.png").convert('RGB')
         im.thumbnail(self.image_size)
-        
+
         photo = PIL.ImageTk.PhotoImage(im)
-        label = tk.Label(self, image=photo)
+        label = tk.Label(self, image=photo, borderwidth=0, highlightthickness=0)
         label.image = photo
         label.grid(row=0, column=0)
 
@@ -55,26 +57,21 @@ class Main(tk.Tk):
 
     def initialize(self):
         self.frame_by_id = {
-            'menu': lambda: NavigationFrame(
+            'menu': lambda: HomeFrame(
                 master=self,
-                items=[
-                    NavigationEntry('pokemon_selector', 'Pokedex'),
-                    # NavigationEntry('camera', 'Camera'),
-                    NavigationEntry('settings', 'Settings'),
-                ],
                 on_item_select=self.on_menu_select,
             ),
             'pokemon_selector': lambda: NavigationFrame(
-                master=self, 
-                items=[NavigationEntry(pokemon.number, f"{pokemon.number_string} {pokemon.name}") 
+                master=self,
+                items=[NavigationEntry(pokemon.number, f"{pokemon.number_string} {pokemon.name}")
                        for pokemon in Pokemon.all()],
                 on_item_select=self.on_pokemon_select,
                 on_back=self.on_return_to_menu,
             ),
             'pokemon_info': lambda pokemon: PokemonInfoFrame(
-                master=self, 
-                pokemon=pokemon, 
-                navigate_back=self.navigate_back, 
+                master=self,
+                pokemon=pokemon,
+                navigate_back=self.navigate_back,
                 show_pokemon_info=self.on_pokemon_select,
             ),
             'settings': lambda: SettingsFrame(
@@ -84,7 +81,8 @@ class Main(tk.Tk):
         }
 
     def on_menu_select(self, frame_id):
-        self.show_frame(frame_id)
+        if frame_id:
+            self.show_frame(frame_id)
 
     def on_pokemon_select(self, number):
         pokemon = Pokemon.get_by_number(number)

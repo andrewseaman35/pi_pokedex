@@ -80,7 +80,9 @@ class EventHandlerMixin():
             self.handle_event(event)
 
     def handle_event(self, event_type):
-        self.event_map[event_type]()
+        handler = self.event_map.get(event_type)
+        if handler:
+            handler()
 
     def on_pause(self):
         if config.IS_RUNNING_ON_RPI:

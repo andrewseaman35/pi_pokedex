@@ -21,12 +21,15 @@ class Badge(tk.Frame):
         return f"./assets/img/badges/{self.badge_type}.png"
 
     def render_image(self):
-        # TODO make transparent background work.
-        im = PIL.Image.open(self.filepath).convert('RGB')
+        im = PIL.Image.open(self.filepath).convert('RGBA')
         im.thumbnail(self.image_size)
 
         photo = PIL.ImageTk.PhotoImage(im)
-        label = tk.Label(self, image=photo)
+        label = tk.Label(
+            self,
+            image=photo,
+            bg=config.BACKGROUND_COLOR,
+        )
         label.image = photo
         label.pack(side="right")
 
@@ -39,7 +42,7 @@ class TypeBadges(tk.Frame):
 
         for badge_type in self.badge_types:
             Badge(
-                master=self, 
+                master=self,
                 badge_type=badge_type
             )
         self.pack(side="right",  anchor='ne')

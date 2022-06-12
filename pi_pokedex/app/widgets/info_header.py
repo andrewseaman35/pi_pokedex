@@ -10,7 +10,7 @@ class InfoHeader(tk.Frame):
         super().__init__(master)
         self.master = master
         self.pokemon = pokemon
-        
+
         self.configure(
             width=config.SCREEN_WIDTH,
             height=config.HEADER_HEIGHT,
@@ -34,7 +34,7 @@ class InfoHeader(tk.Frame):
         )
         self.pokemon_text = self.canvas.create_text(0, 12,
             fill="black",
-            font=(f"{config.TYPEFACE} Medium", 14),
+            font=(f"{config.TYPEFACE} Bold", 14),
             text=pokemon.name,
             anchor=tk.NW,
         )
