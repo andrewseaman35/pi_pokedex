@@ -1,4 +1,4 @@
-from navigation import NavigationFrame, NavigationEntry
+from frames.navigation import NavigationFrame, NavigationEntry
 from utils import get_ip_address
 
 

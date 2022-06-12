@@ -4,13 +4,13 @@ import PIL.ImageTk
 import tkinter as tk
 
 import config
+
 from pokemon import Pokemon
 
 from frames.home import HomeFrame
-
-from navigation import NavigationFrame, NavigationEntry
-from settings import SettingsFrame
-from pokemon_info import PokemonInfoFrame
+from frames.navigation import NavigationFrame, NavigationEntry
+from frames.settings import SettingsFrame
+from frames.pokemon_info import PokemonInfoFrame
 
 
 class SplashFrame(tk.Frame):
@@ -38,6 +38,7 @@ class Main(tk.Tk):
         self.title('Pokedéx')
         self.geometry(f"{config.SCREEN_WIDTH}x{config.SCREEN_HEIGHT}")
         self.resizable(False, False)
+        # self.attributes("-fullscreen", True)
 
         self.frame_stack = []
 

@@ -112,6 +112,9 @@ class EvolutionSection(tk.Frame):
                 evolution_item.pack(side=tk.LEFT, pady=(4, 0))
                 self.item_frames.append(evolution_item)
 
+                if active:
+                    self.highlighted_index = len(self.item_frames) - 1
+
                 if not is_last:
                     EvolutionSectionItem(inner, ">", size=14, justify=tk.CENTER).pack(side=tk.LEFT, padx=10)
         else:
