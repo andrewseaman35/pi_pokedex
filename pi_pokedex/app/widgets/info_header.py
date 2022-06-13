@@ -26,13 +26,17 @@ class InfoHeader(tk.Frame):
             width=config.SCREEN_WIDTH,
             height=config.HEADER_HEIGHT,
         )
-        self.number_text = self.canvas.create_text(0, 0,
+        self.number_text = self.canvas.create_text(
+            0,
+            0,
             fill="black",
             font=(config.TYPEFACE, 10),
             text=self.pokemon.number_string,
             anchor=tk.NW,
         )
-        self.pokemon_text = self.canvas.create_text(0, 12,
+        self.pokemon_text = self.canvas.create_text(
+            0,
+            12,
             fill="black",
             font=(f"{config.TYPEFACE} Bold", 14),
             text=pokemon.name,

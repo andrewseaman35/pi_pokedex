@@ -16,7 +16,9 @@ from widgets.evolution_section import EvolutionSection
 
 
 class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
-    def __init__(self, master=None, pokemon=None, navigate_back=None, show_pokemon_info=None):
+    def __init__(
+        self, master=None, pokemon=None, navigate_back=None, show_pokemon_info=None
+    ):
         super().__init__(master)
         self.master = master
         self.pokemon = pokemon
@@ -65,7 +67,10 @@ class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
 
     def handle_select(self):
         highlighted_pokemon = self.evolution_section.get_highlighted_pokemon()
-        if highlighted_pokemon is None or highlighted_pokemon.number == self.pokemon.number:
+        if (
+            highlighted_pokemon is None
+            or highlighted_pokemon.number == self.pokemon.number
+        ):
             return
 
         self.navigate_back()

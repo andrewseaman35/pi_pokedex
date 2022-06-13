@@ -7,14 +7,14 @@ import config
 
 
 STAT_LABEL_BY_KEY = {
-    'special_attack': 'Sp. Atk',
-    'special_defense': 'Sp. Def',
+    "special_attack": "Sp. Atk",
+    "special_defense": "Sp. Def",
 }
 
 
 STAT_VALUE_TO_DISPLAY = {
-    'category': lambda cat: cat.title(),
-    'abilities': lambda abls: ', '.join(abls),
+    "category": lambda cat: cat.title(),
+    "abilities": lambda abls: ", ".join(abls),
 }
 
 
@@ -22,7 +22,7 @@ class PokemonImage(tk.Frame):
     image_size = (100, 100)
 
     def __init__(self, master, pokemon):
-        super().__init__(master, bg='white')
+        super().__init__(master, bg="white")
         self.master = master
         self.pokemon = pokemon
         self.render_image()
@@ -32,7 +32,7 @@ class PokemonImage(tk.Frame):
         return f"./assets/img/pokemon/{self.pokemon}.png"
 
     def render_image(self):
-        im = PIL.Image.open(self.filepath).convert('RGBA')
+        im = PIL.Image.open(self.filepath).convert("RGBA")
         im.thumbnail(self.image_size)
         photo = PIL.ImageTk.PhotoImage(im)
         label = tk.Label(
@@ -87,12 +87,19 @@ class StatsColumn(tk.Frame):
             )
             value_element.grid(column=1, row=i)
 
-        self.pack(side=tk.LEFT, expand=True, padx=(5,0))
+        self.pack(side=tk.LEFT, expand=True, padx=(5, 0))
 
 
 class StatsTable(tk.Frame):
-    stat_keys = ['category', 'abilities', 'height', 'weight', 'gender']
-    base_stat_keys = ['hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed']
+    stat_keys = ["category", "abilities", "height", "weight", "gender"]
+    base_stat_keys = [
+        "hp",
+        "attack",
+        "defense",
+        "special_attack",
+        "special_defense",
+        "speed",
+    ]
 
     def __init__(self, master, pokemon):
         super().__init__(master)

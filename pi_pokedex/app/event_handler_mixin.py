@@ -5,12 +5,12 @@ import config
 if config.IS_RUNNING_ON_RPI:
     import RPi.GPIO as GPIO
 
-EVENT_UP = 'up'
-EVENT_DOWN = 'down'
-EVENT_LEFT = 'left'
-EVENT_RIGHT = 'right'
-EVENT_BACK = 'back'
-EVENT_SELECT = 'select'
+EVENT_UP = "up"
+EVENT_DOWN = "down"
+EVENT_LEFT = "left"
+EVENT_RIGHT = "right"
+EVENT_BACK = "back"
+EVENT_SELECT = "select"
 
 PIN_UP = 8
 PIN_DOWN = 10
@@ -29,16 +29,16 @@ PIN_EVENT_MAP = {
 }
 
 KEY_EVENT_MAP = {
-    'w': EVENT_UP,
-    'a': EVENT_LEFT,
-    's': EVENT_DOWN,
-    'd': EVENT_RIGHT,
-    'j': EVENT_BACK,
-    'k': EVENT_SELECT,
+    "w": EVENT_UP,
+    "a": EVENT_LEFT,
+    "s": EVENT_DOWN,
+    "d": EVENT_RIGHT,
+    "j": EVENT_BACK,
+    "k": EVENT_SELECT,
 }
 
 
-class EventHandlerMixin():
+class EventHandlerMixin:
     def __init__(self, *args, **kwargs):
         self.event_map = {}
 
@@ -47,7 +47,7 @@ class EventHandlerMixin():
         if config.IS_RUNNING_ON_RPI:
             self.init_gpio()
         else:
-            self.bind('<KeyPress>', self.on_keyboard_press)
+            self.bind("<KeyPress>", self.on_keyboard_press)
 
     def init_gpio(self):
         GPIO.setwarnings(False)
@@ -63,7 +63,9 @@ class EventHandlerMixin():
 
     def add_event_detection(self):
         for pin in PIN_EVENT_MAP.keys():
-            GPIO.add_event_detect(pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin))
+            GPIO.add_event_detect(
+                pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
+            )
 
     def remove_event_detection(self):
         for pin in PIN_EVENT_MAP.keys():

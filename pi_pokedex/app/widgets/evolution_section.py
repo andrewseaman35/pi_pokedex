@@ -6,14 +6,23 @@ from pokemon import Pokemon
 
 
 class EvolutionSectionItem(tk.Frame):
-    def __init__(self, master, text, size=11, bold=False, italic=False, underline=False, justify=tk.LEFT):
+    def __init__(
+        self,
+        master,
+        text,
+        size=11,
+        bold=False,
+        italic=False,
+        underline=False,
+        justify=tk.LEFT,
+    ):
         super().__init__(master)
 
         font_modifiers = []
         if bold:
-            font_modifiers.append('Bold')
+            font_modifiers.append("Bold")
         if italic:
-            font_modifiers.append('Italic')
+            font_modifiers.append("Italic")
 
         self.configure(
             borderwidth=0,
@@ -53,6 +62,7 @@ class EvolutionSectionItem(tk.Frame):
     def rerender(self):
         self.label.update()
 
+
 class Evolution(EvolutionSectionItem):
     def __init__(self, master, name, active=False):
         super().__init__(master, text=name, bold=active)
@@ -63,13 +73,16 @@ class Evolution(EvolutionSectionItem):
         self.set_font_modifiers(underline=self.highlighted)
         self.rerender()
 
+
 class EvolutionSection(tk.Frame):
     def __init__(self, master, pokemon):
         super().__init__(master)
         self.master = master
         self.pokemon = pokemon
         evolution_numbers = pokemon.evolutions
-        self.evolution_pokemon = [Pokemon.get_by_number(number) for number in evolution_numbers]
+        self.evolution_pokemon = [
+            Pokemon.get_by_number(number) for number in evolution_numbers
+        ]
         self.current_pokemon_index = evolution_numbers.index(self.pokemon.number)
 
         self.highlighted_index = None
@@ -116,9 +129,13 @@ class EvolutionSection(tk.Frame):
                     self.highlighted_index = len(self.item_frames) - 1
 
                 if not is_last:
-                    EvolutionSectionItem(inner, ">", size=14, justify=tk.CENTER).pack(side=tk.LEFT, padx=10)
+                    EvolutionSectionItem(inner, ">", size=14, justify=tk.CENTER).pack(
+                        side=tk.LEFT, padx=10
+                    )
         else:
-            EvolutionSectionItem(inner, "No evolutions", italic=True).pack(side=tk.LEFT, pady=(4, 0))
+            EvolutionSectionItem(inner, "No evolutions", italic=True).pack(
+                side=tk.LEFT, pady=(4, 0)
+            )
 
     def rerender(self):
         for i, item_frame in enumerate(self.item_frames):
@@ -136,11 +153,13 @@ class EvolutionSection(tk.Frame):
     def handle_right(self):
         def _get_incremented_index():
             return min(self.highlighted_index + 1, len(self.evolution_pokemon) - 1)
+
         self._handle_highlight_change(_get_incremented_index)
 
     def handle_left(self):
         def _get_decremented_index():
             return max(self.highlighted_index - 1, 0)
+
         self._handle_highlight_change(_get_decremented_index)
 
     def get_highlighted_pokemon(self):

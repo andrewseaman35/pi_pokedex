@@ -22,10 +22,10 @@ NavigationEntry = namedtuple("NavigationEntry", "value label")
 
 
 class NavigationItem(tk.Frame):
-    def __init__(self, master=None, width=120, text='item', state='default', **kwargs):
+    def __init__(self, master=None, width=120, text="item", state="default", **kwargs):
         super().__init__(master, **kwargs)
         self.width = width
-        self.height = (config.SCREEN_HEIGHT / ITEMS_PER_PAGE)
+        self.height = config.SCREEN_HEIGHT / ITEMS_PER_PAGE
         self.text = text
         self.state = state
         self.configure(
@@ -42,7 +42,9 @@ class NavigationItem(tk.Frame):
             width=self.width,
             height=self.height,
         )
-        self.text = self.canvas.create_text(20, 5,
+        self.text = self.canvas.create_text(
+            20,
+            5,
             fill="black",
             font=tkfont.Font(family=config.TYPEFACE, size=12, weight="normal"),
             text=self.text,
@@ -52,10 +54,12 @@ class NavigationItem(tk.Frame):
 
     @property
     def active(self):
-        return self.state == 'active'
+        return self.state == "active"
 
     def get_background_color(self):
-        return config.NAV_ITEM_SELECTED_COLOR if self.active else config.BACKGROUND_COLOR
+        return (
+            config.NAV_ITEM_SELECTED_COLOR if self.active else config.BACKGROUND_COLOR
+        )
 
     def set_state(self, state):
         self.state = state
@@ -114,7 +118,7 @@ class NavigationFrame(EventHandlerMixin, tk.Frame):
     def get_items_page(self, page_index):
         start_index = page_index * ITEMS_PER_PAGE
         end_index = start_index + ITEMS_PER_PAGE
-        return self.items[start_index: end_index]
+        return self.items[start_index:end_index]
 
     def handle_up(self):
         previous_index = self.current_page_index
@@ -172,7 +176,7 @@ class NavigationFrame(EventHandlerMixin, tk.Frame):
 
         page_items = self.get_items_page(self.current_page)
         for i, item in enumerate(page_items):
-            state = 'active' if i == self.current_page_index else 'inactive'
+            state = "active" if i == self.current_page_index else "inactive"
             frame = NavigationItem(
                 master=self,
                 width=config.SCREEN_WIDTH,
@@ -184,5 +188,5 @@ class NavigationFrame(EventHandlerMixin, tk.Frame):
 
     def refresh_item(self, index):
         frame = self.frames[index]
-        state = 'active' if index == self.current_page_index else 'inactive'
+        state = "active" if index == self.current_page_index else "inactive"
         frame.set_state(state)

@@ -1,10 +1,21 @@
 import json
 
 
-class Pokemon():
+class Pokemon:
     _pokemon_by_number = {}
 
-    def __init__(self, number, name, red_description, blue_description, images, stats, attributes, evolutions, base_stats):
+    def __init__(
+        self,
+        number,
+        name,
+        red_description,
+        blue_description,
+        images,
+        stats,
+        attributes,
+        evolutions,
+        base_stats,
+    ):
         if number in self._pokemon_by_number:
             raise ValueError(f"duplicate pokemon number: {number}")
 
@@ -21,7 +32,7 @@ class Pokemon():
         self._pokemon_by_number[number] = self
 
     def __str__(self):
-        return (f"({self.number_string}) {self.name}")
+        return f"({self.number_string}) {self.name}"
 
     @classmethod
     def all(cls):
@@ -34,12 +45,13 @@ class Pokemon():
     @property
     def number_string(self):
         return f"#{self.number:03}"
-    
+
     @property
     def types(self):
-        return self.attributes['types']
+        return self.attributes["types"]
 
-with open('./app/pokemon.json', 'r') as f:
+
+with open("./app/pokemon.json", "r") as f:
     pokemon_data = json.loads(f.read())
 
-[Pokemon(**pokemon) for pokemon in pokemon_data['pokemon']]
+[Pokemon(**pokemon) for pokemon in pokemon_data["pokemon"]]

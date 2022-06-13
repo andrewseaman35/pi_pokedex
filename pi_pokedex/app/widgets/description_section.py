@@ -8,7 +8,7 @@ class DescriptionSection(tk.Frame):
         super().__init__(master)
         self.master = master
         self.description = description
-        
+
         self.configure(
             width=config.SCREEN_WIDTH,
             height=config.DESCRIPTION_HEIGHT,
@@ -25,12 +25,14 @@ class DescriptionSection(tk.Frame):
             width=config.SCREEN_WIDTH,
             height=config.DESCRIPTION_HEIGHT,
         )
-        self.text = self.canvas.create_text(0, 0,
+        self.text = self.canvas.create_text(
+            0,
+            0,
             fill="black",
             font=(config.TYPEFACE, 10),
             text=self.description,
             anchor=tk.NW,
-            width=config.SCREEN_WIDTH - 20
+            width=config.SCREEN_WIDTH - 20,
         )
         # self.canvas.pack(side="left")
         self.canvas.grid(row=0, column=0, pady=5)

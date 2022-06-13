@@ -16,7 +16,16 @@ from event_handler_mixin import (
 
 
 class HomeItem(tk.Frame):
-    def __init__(self, master=None, width=None, height=None, text='item', icon=None, text_anchor=tk.NW, state='default', **kwargs):
+    def __init__(
+        self,
+        master=None,
+        width=None,
+        height=None,
+        text="item",
+        icon=None,
+        state="default",
+        **kwargs,
+    ):
         super().__init__(master, **kwargs)
         highlight_thickness = 1
         self.width = width
@@ -55,10 +64,10 @@ class HomeItem(tk.Frame):
 
     @property
     def active(self):
-        return self.state == 'active'
+        return self.state == "active"
 
     def get_border_color(self):
-        return '#111111' if self.active else config.HOME_ITEM_COLOR
+        return "#111111" if self.active else config.HOME_ITEM_COLOR
 
     def set_state(self, state):
         self.state = state
@@ -73,7 +82,15 @@ class HomeItem(tk.Frame):
 
 
 class SettingsItem(tk.Frame):
-    def __init__(self, master=None, width=None, height=None, text='item', text_anchor=tk.NW, state='default', **kwargs):
+    def __init__(
+        self,
+        master=None,
+        width=None,
+        height=None,
+        text="item",
+        state="default",
+        **kwargs,
+    ):
         super().__init__(master, **kwargs)
         highlight_thickness = 1
         self.width = width
@@ -107,10 +124,10 @@ class SettingsItem(tk.Frame):
 
     @property
     def active(self):
-        return self.state == 'active'
+        return self.state == "active"
 
     def get_border_color(self):
-        return '#111111' if self.active else config.HOME_ITEM_COLOR
+        return "#111111" if self.active else config.HOME_ITEM_COLOR
 
     def set_state(self, state):
         self.state = state
@@ -148,10 +165,10 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
     @property
     def active_next_frame_id(self):
         if self.pokemon_frame.active:
-            return 'pokemon_selector'
+            return "pokemon_selector"
         if self.camera_frame.active:
             return None
-        return 'settings'
+        return "settings"
 
     def handle_up(self):
         if self.settings_frame.active:
@@ -175,8 +192,8 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
         self.on_item_select(self.active_next_frame_id)
 
     def transition_active_from_to(self, item_from, item_to):
-        item_from.set_state('default')
-        item_to.set_state('active')
+        item_from.set_state("default")
+        item_to.set_state("active")
 
     def render(self):
         self.pokemon_frame = HomeItem(
@@ -202,14 +219,13 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
         self.camera_frame.place(
             anchor=tk.NE,
             x=config.SCREEN_WIDTH - config.HOME_LEFT_RIGHT_MARGIN,
-            y=config.HOME_TOP_MARGIN
+            y=config.HOME_TOP_MARGIN,
         )
         self.settings_frame = SettingsItem(
             self,
             width=config.SCREEN_WIDTH - (2 * config.HOME_LEFT_RIGHT_MARGIN),
             height=config.HOME_SETTINGS_ITEM_HEIGHT,
             text="Settings",
-            text_anchor=tk.N,
         )
         self.settings_frame.place(
             anchor=tk.N,
@@ -232,7 +248,7 @@ class HomeItemImage(tk.Frame):
         return f"./assets/img/home/{self.icon}.png"
 
     def render_image(self):
-        im = PIL.Image.open(self.filepath).convert('RGBA')
+        im = PIL.Image.open(self.filepath).convert("RGBA")
         im.thumbnail(self.image_size)
         photo = PIL.ImageTk.PhotoImage(im)
         label = tk.Label(
