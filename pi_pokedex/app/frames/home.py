@@ -1,11 +1,12 @@
+import PIL.Image
+import PIL.ImageTk
+
 from collections import namedtuple
-import math
 
 import tkinter as tk
 from tkinter import font as tkfont
 
 import config
-from pokemon import Pokemon
 from event_handler_mixin import (
     EventHandlerMixin,
     EVENT_UP,
@@ -22,13 +23,14 @@ NavigationEntry = namedtuple("NavigationEntry", "value label")
 
 
 class HomeItem(tk.Frame):
-    def __init__(self, master=None, width=None, height=None, text='item', text_anchor=tk.NW, state='default', **kwargs):
+    def __init__(self, master=None, width=None, height=None, text='item', icon=None, text_anchor=tk.NW, state='default', **kwargs):
         super().__init__(master, **kwargs)
         highlight_thickness = 1
         self.width = width
         self.height = height
         self.text = text
         self.state = state
+        self.icon = icon
         self.configure(
             width=self.width,
             height=self.height,
@@ -44,12 +46,18 @@ class HomeItem(tk.Frame):
             width=self.width,
             height=self.height,
         )
-        self.text = self.canvas.create_text(20, 0,
-            fill="black",
-            font=tkfont.Font(family=config.TYPEFACE, size=10, weight="bold"),
+        self.image = HomeItemImage(self.canvas, self.icon)
+
+        self.label = tk.Label(
+            self.canvas,
             text=self.text,
-            anchor=text_anchor,
+            background=config.HOME_ITEM_COLOR,
+            fg=config.BLACK,
+            font=tkfont.Font(family=config.TYPEFACE, size=10, weight="bold"),
+            anchor=tk.W,
+            justify=tk.LEFT,
         )
+        self.label.pack(side=tk.TOP, pady=(0, 15))
         self.canvas.pack()
 
     @property
@@ -184,6 +192,7 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
             height=config.HOME_ITEM_HEIGHT,
             text="Pokemon",
             state="active",
+            icon="icon_pokeball",
         )
         self.pokemon_frame.place(
             anchor=tk.NW,
@@ -195,6 +204,7 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
             width=config.HOME_ITEM_WIDTH,
             height=config.HOME_ITEM_HEIGHT,
             text="Camera",
+            icon="icon_camera",
         )
         self.camera_frame.place(
             anchor=tk.NE,
@@ -213,3 +223,30 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
             x=config.SCREEN_WIDTH / 2,
             y=config.HOME_SETTINGS_TOP_MARGIN,
         )
+
+
+class HomeItemImage(tk.Frame):
+    image_size = (100, 100)
+
+    def __init__(self, master, icon):
+        super().__init__(master, bg=config.HOME_ITEM_COLOR)
+        self.master = master
+        self.icon = icon
+        self.render_image()
+
+    @property
+    def filepath(self):
+        return f"./assets/img/home/{self.icon}.png"
+
+    def render_image(self):
+        im = PIL.Image.open(self.filepath).convert('RGBA')
+        im.thumbnail(self.image_size)
+        photo = PIL.ImageTk.PhotoImage(im)
+        label = tk.Label(
+            self.master,
+            image=photo,
+            bg=config.HOME_ITEM_COLOR,
+            borderwidth=0,
+        )
+        label.image = photo
+        label.pack(side=tk.TOP, padx=25, pady=(15, 0))
