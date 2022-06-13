@@ -1,8 +1,6 @@
 import PIL.Image
 import PIL.ImageTk
 
-from collections import namedtuple
-
 import tkinter as tk
 from tkinter import font as tkfont
 
@@ -15,11 +13,6 @@ from event_handler_mixin import (
     EVENT_RIGHT,
     EVENT_SELECT,
 )
-
-ITEMS_PER_PAGE = 10
-
-
-NavigationEntry = namedtuple("NavigationEntry", "value label")
 
 
 class HomeItem(tk.Frame):

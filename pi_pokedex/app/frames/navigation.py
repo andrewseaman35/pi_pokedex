@@ -2,9 +2,9 @@ from collections import namedtuple
 import math
 
 import tkinter as tk
+from tkinter import font as tkfont
 
 import config
-from pokemon import Pokemon
 from event_handler_mixin import (
     EventHandlerMixin,
     EVENT_UP,
@@ -24,9 +24,8 @@ NavigationEntry = namedtuple("NavigationEntry", "value label")
 class NavigationItem(tk.Frame):
     def __init__(self, master=None, width=120, text='item', state='default', **kwargs):
         super().__init__(master, **kwargs)
-        highlight_thickness = 1
         self.width = width
-        self.height = (config.SCREEN_HEIGHT / ITEMS_PER_PAGE) - (2 * highlight_thickness)
+        self.height = (config.SCREEN_HEIGHT / ITEMS_PER_PAGE)
         self.text = text
         self.state = state
         self.configure(
@@ -34,8 +33,7 @@ class NavigationItem(tk.Frame):
             height=self.height,
             borderwidth=0,
             background=self.get_background_color(),
-            highlightbackground=self.get_border_color(),
-            highlightthickness=highlight_thickness,
+            highlightthickness=0,
         )
         self.canvas = tk.Canvas(
             master=self,
@@ -44,9 +42,9 @@ class NavigationItem(tk.Frame):
             width=self.width,
             height=self.height,
         )
-        self.text = self.canvas.create_text(20, 0,
+        self.text = self.canvas.create_text(20, 5,
             fill="black",
-            font=(config.TYPEFACE, 16),
+            font=tkfont.Font(family=config.TYPEFACE, size=12, weight="normal"),
             text=self.text,
             anchor=tk.NW,
         )
@@ -57,10 +55,7 @@ class NavigationItem(tk.Frame):
         return self.state == 'active'
 
     def get_background_color(self):
-        return '#888888' if self.active else '#ffffff'
-
-    def get_border_color(self):
-        return '#111111' if self.active else '#666666'
+        return config.NAV_ITEM_SELECTED_COLOR if self.active else config.BACKGROUND_COLOR
 
     def set_state(self, state):
         self.state = state
@@ -69,7 +64,6 @@ class NavigationItem(tk.Frame):
     def rerender(self):
         self.configure(
             background=self.get_background_color(),
-            highlightbackground=self.get_border_color(),
         )
         self.update()
         self.canvas.configure(

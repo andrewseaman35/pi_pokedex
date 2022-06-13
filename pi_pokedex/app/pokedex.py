@@ -64,7 +64,7 @@ class Main(tk.Tk):
             ),
             'pokemon_selector': lambda: NavigationFrame(
                 master=self,
-                items=[NavigationEntry(pokemon.number, f"{pokemon.number_string} {pokemon.name}")
+                items=[NavigationEntry(pokemon.number, f"{pokemon.number_string}  {pokemon.name}")
                        for pokemon in Pokemon.all()],
                 on_item_select=self.on_pokemon_select,
                 on_back=self.on_return_to_menu,
