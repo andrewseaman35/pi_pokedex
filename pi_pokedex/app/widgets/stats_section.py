@@ -79,7 +79,7 @@ class StatsColumn(tk.Frame):
                 text=value,
                 bg=config.BACKGROUND_COLOR,
                 fg=config.BLACK,
-                font=(f"{config.TYPEFACE} Bold", 9),
+                font=(f"{config.TYPEFACE} Bold", 6),
                 anchor=value_anchor,
                 justify=tk.LEFT,
                 wraplength=70,
