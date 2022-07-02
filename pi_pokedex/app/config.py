@@ -1,6 +1,7 @@
 import os
 
-TYPEFACE = "Avenir Next"
+#TYPEFACE = "Avenir Next"
+TYPEFACE = "FreeSans"
 
 SCREEN_WIDTH = 320
 SCREEN_HEIGHT = 240
