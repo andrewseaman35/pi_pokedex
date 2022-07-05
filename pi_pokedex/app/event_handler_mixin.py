@@ -56,6 +56,7 @@ class EventHandlerMixin:
 
     @classmethod
     def init_gpio(cls):
+        global HAS_INITIALIZED_GPIO
         if not HAS_INITIALIZED_GPIO:
             print("GPIO INIT")
             GPIO.setwarnings(False)
