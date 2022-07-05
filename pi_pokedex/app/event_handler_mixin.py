@@ -39,6 +39,7 @@ KEY_EVENT_MAP = {
 
 
 HAS_INITIALIZED_GPIO = False
+HAS_INITIALIZED_EVENTS = False
 
 class EventHandlerMixin:
 
@@ -50,8 +51,8 @@ class EventHandlerMixin:
 
         if config.IS_RUNNING_ON_RPI:
             self.init_gpio()
-            global HAS_INITIALIZED_GPIO
-            if not HAS_INITIALIZED_GPIO:
+            global HAS_INITIALIZED_EVENTS
+            if not HAS_INITIALIZED_EVENTS:
                 self.add_event_detection()
 
         self.bind("<KeyPress>", self.on_keyboard_press)
@@ -71,10 +72,12 @@ class EventHandlerMixin:
         self.event_map = {}
 
     def add_event_detection(self):
+        global HAS_INITIALIZED_EVENTS
         for pin in PIN_EVENT_MAP.keys():
             GPIO.add_event_detect(
                 pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
             )
+        HAS_INITIALIZED_EVENTS = True
 
     def remove_event_detection(self):
         for pin in PIN_EVENT_MAP.keys():
