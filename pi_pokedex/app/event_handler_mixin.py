@@ -43,6 +43,7 @@ class EventHandlerMixin:
         self.event_map = {}
 
         super().__init__(*args, **kwargs)
+        print(f"initing: {self}")
 
         if config.IS_RUNNING_ON_RPI:
             self.init_gpio()
@@ -90,14 +91,17 @@ class EventHandlerMixin:
             handler()
 
     def on_pause(self):
+        print(f"pausing: {self}")
         if config.IS_RUNNING_ON_RPI:
             self.remove_event_detection()
 
     def on_resume(self):
+        print(f"resuming: {self}")
         if config.IS_RUNNING_ON_RPI:
             self.add_event_detection()
 
     def destroy(self):
+        print(f"Destorying: {self}")
         if config.IS_RUNNING_ON_RPI:
             self.remove_event_detection()
         super().destroy()
