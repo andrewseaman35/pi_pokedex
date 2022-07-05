@@ -50,7 +50,9 @@ class EventHandlerMixin:
 
         if config.IS_RUNNING_ON_RPI:
             self.init_gpio()
-            self.add_event_detection()
+            global HAS_INITIALIZED_GPIO
+            if not HAS_INITIALIZED_GPIO:
+                self.add_event_detection()
 
         self.bind("<KeyPress>", self.on_keyboard_press)
 
