@@ -38,9 +38,9 @@ KEY_EVENT_MAP = {
 }
 
 
+HAS_INITIALIZED_GPIO = False
 
 class EventHandlerMixin:
-    has_initialized_gpio = False
 
     def __init__(self, *args, **kwargs):
         self.event_map = {}
@@ -56,13 +56,13 @@ class EventHandlerMixin:
 
     @classmethod
     def init_gpio(cls):
-        if not cls.has_initialized_gpio:
+        if not HAS_INITIALIZED_GPIO:
             print("GPIO INIT")
             GPIO.setwarnings(False)
             GPIO.setmode(GPIO.BOARD)
             for pin in PIN_EVENT_MAP.keys():
                 GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            cls.has_initialized_gpio = True
+            HAS_INITIALIZED_GPIO = True
 
     def init_event_map(self):
         self.event_map = {}
