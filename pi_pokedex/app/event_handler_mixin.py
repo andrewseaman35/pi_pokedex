@@ -50,6 +50,7 @@ class EventHandlerMixin:
             self.bind("<KeyPress>", self.on_keyboard_press)
 
     def init_gpio(self):
+        print("GPIO INIT")
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         self._callback = None
@@ -72,6 +73,7 @@ class EventHandlerMixin:
             GPIO.remove_event_detect(pin)
 
     def on_gpio_event(self, pin):
+        print(f"pin: {pin}")
         if pin in PIN_EVENT_MAP:
             event = PIN_EVENT_MAP[pin]
             self.handle_event(event)
@@ -83,6 +85,7 @@ class EventHandlerMixin:
 
     def handle_event(self, event_type):
         handler = self.event_map.get(event_type)
+        print(f"handling {handler}")
         if handler:
             handler()
 

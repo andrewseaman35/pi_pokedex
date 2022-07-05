@@ -1,3 +1,5 @@
-Pillow
-six
-tk
+Pillow==8.3.1
+pkg_resources==0.0.0
+RPi.GPIO==0.7.1
+six==1.15.0
+tk==0.1.0
