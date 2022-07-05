@@ -12,12 +12,13 @@ EVENT_RIGHT = "right"
 EVENT_BACK = "back"
 EVENT_SELECT = "select"
 
-PIN_UP = 8
-PIN_DOWN = 10
-PIN_LEFT = 12
-PIN_RIGHT = 16
-PIN_SELECT = 18
-PIN_BACK = 22
+# Channel numbers, not GPIO numbers
+PIN_UP = 3
+PIN_DOWN = 5
+PIN_LEFT = 7
+PIN_RIGHT = 11
+PIN_SELECT = 13
+PIN_BACK = 15
 
 PIN_EVENT_MAP = {
     PIN_UP: EVENT_UP,
