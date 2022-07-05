@@ -96,7 +96,10 @@ class Main(tk.Tk):
 
     def show_frame(self, frame_id, **kwargs):
         if self.frame and hasattr(self.frame, "on_pause"):
+            print(f"pausing {self.frame}")
             self.frame.on_pause()
+        else:
+            print(f"aint got no pause, {self.frame}")
         self.frame = self.frame_by_id[frame_id](**kwargs)
         self.render_current_frame()
 

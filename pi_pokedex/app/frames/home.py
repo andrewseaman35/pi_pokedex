@@ -189,6 +189,7 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
             self.transition_active_from_to(self.pokemon_frame, self.camera_frame)
 
     def handle_select(self):
+        print(f"handling select: {self.active_next_frame_id}")
         self.on_item_select(self.active_next_frame_id)
 
     def transition_active_from_to(self, item_from, item_to):
