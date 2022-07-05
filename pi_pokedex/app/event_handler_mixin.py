@@ -73,6 +73,7 @@ class EventHandlerMixin:
 
     def add_event_detection(self):
         global HAS_INITIALIZED_EVENTS
+        print("Initialing events")
         for pin in PIN_EVENT_MAP.keys():
             GPIO.add_event_detect(
                 pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
@@ -80,6 +81,7 @@ class EventHandlerMixin:
         HAS_INITIALIZED_EVENTS = True
 
     def remove_event_detection(self):
+        return
         for pin in PIN_EVENT_MAP.keys():
             GPIO.remove_event_detect(pin)
 
