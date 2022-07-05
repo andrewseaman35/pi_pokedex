@@ -38,8 +38,33 @@ KEY_EVENT_MAP = {
 }
 
 
-HAS_INITIALIZED_GPIO = False
-HAS_INITIALIZED_EVENTS = False
+class _GPIOManager:
+    _instance = None
+
+    def __init__(self, on_gpio_event):
+        self.init_gpio()
+        self.on_gpio_event = on_gpio_event
+
+    def init_gpio(self):
+        print("GPIO INIT")
+        GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BOARD)
+        for pin in PIN_EVENT_MAP.keys():
+            GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+    def add_event_detection(self):
+        print("Initialing events")
+        for pin in PIN_EVENT_MAP.keys():
+            GPIO.add_event_detect(
+                pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
+            )
+
+
+
+def GPIOManager(on_gpio_event):
+    if _GPIOManager._instance is None:
+        _GPIOManager._instance = _GPIOManager(on_gpio_event)
+    return _GPIOManager._instance
 
 class EventHandlerMixin:
 
@@ -49,36 +74,14 @@ class EventHandlerMixin:
         super().__init__(*args, **kwargs)
         print(f"initing: {self}")
 
+        self.gpio_manager = None
         if config.IS_RUNNING_ON_RPI:
-            self.init_gpio()
-            global HAS_INITIALIZED_EVENTS
-            if not HAS_INITIALIZED_EVENTS:
-                self.add_event_detection()
+            self.gpio_manager = GPIOManager(self.on_gpio_event)
 
         self.bind("<KeyPress>", self.on_keyboard_press)
 
-    @classmethod
-    def init_gpio(cls):
-        global HAS_INITIALIZED_GPIO
-        if not HAS_INITIALIZED_GPIO:
-            print("GPIO INIT")
-            GPIO.setwarnings(False)
-            GPIO.setmode(GPIO.BOARD)
-            for pin in PIN_EVENT_MAP.keys():
-                GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            HAS_INITIALIZED_GPIO = True
-
     def init_event_map(self):
         self.event_map = {}
-
-    def add_event_detection(self):
-        global HAS_INITIALIZED_EVENTS
-        print("Initialing events")
-        for pin in PIN_EVENT_MAP.keys():
-            GPIO.add_event_detect(
-                pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
-            )
-        HAS_INITIALIZED_EVENTS = True
 
     def remove_event_detection(self):
         return
