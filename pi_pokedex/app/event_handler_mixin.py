@@ -42,8 +42,9 @@ class _GPIOManager:
     _instance = None
 
     def __init__(self, on_gpio_event):
-        self.init_gpio()
         self.on_gpio_event = on_gpio_event
+        self.init_gpio()
+        self.add_event_detection()
 
     def init_gpio(self):
         print("GPIO INIT")
