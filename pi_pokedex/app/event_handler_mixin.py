@@ -55,6 +55,7 @@ class _GPIOManager:
     def add_event_detection(self):
         print("Initialing events")
         for pin in PIN_EVENT_MAP.keys():
+            print(f"initializing pin {pin}")
             GPIO.add_event_detect(
                 pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
             )
@@ -86,11 +87,6 @@ class EventHandlerMixin:
     def init_event_map(self):
         self.event_map = {}
 
-    def remove_event_detection(self):
-        return
-        for pin in PIN_EVENT_MAP.keys():
-            GPIO.remove_event_detect(pin)
-
     def on_gpio_event(self, pin):
         print(f"pin: {pin}")
         if pin in PIN_EVENT_MAP:
@@ -107,19 +103,3 @@ class EventHandlerMixin:
         print(f"handling {handler}")
         if handler:
             handler()
-
-    def on_pause(self):
-        print(f"pausing: {self}")
-        if config.IS_RUNNING_ON_RPI:
-            self.remove_event_detection()
-
-    def on_resume(self):
-        print(f"resuming: {self}")
-        if config.IS_RUNNING_ON_RPI:
-            self.add_event_detection()
-
-    def destroy(self):
-        print(f"Destorying: {self}")
-        if config.IS_RUNNING_ON_RPI:
-            self.remove_event_detection()
-        super().destroy()
