@@ -41,8 +41,7 @@ KEY_EVENT_MAP = {
 class _GPIOManager:
     _instance = None
 
-    def __init__(self, on_gpio_event):
-        self.on_gpio_event = on_gpio_event
+    def __init__(self):
         self.init_gpio()
         self.add_event_detection()
 
@@ -60,11 +59,13 @@ class _GPIOManager:
                 pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
             )
 
+    def set_on_gpio_event_handler(self, on_gpio_event):
+        self.on_gpio_event = on_gpio_event
 
 
-def GPIOManager(on_gpio_event):
+def GPIOManager():
     if _GPIOManager._instance is None:
-        _GPIOManager._instance = _GPIOManager(on_gpio_event)
+        _GPIOManager._instance = _GPIOManager()
     return _GPIOManager._instance
 
 class EventHandlerMixin:
@@ -77,7 +78,8 @@ class EventHandlerMixin:
 
         self.gpio_manager = None
         if config.IS_RUNNING_ON_RPI:
-            self.gpio_manager = GPIOManager(self.on_gpio_event)
+            self.gpio_manager = GPIOManager()
+            self.gpio_manager.set_on_gpio_event_handler(self.on_gpio_event)
 
         self.bind("<KeyPress>", self.on_keyboard_press)
 
