@@ -57,8 +57,10 @@ class _GPIOManager:
         for pin in PIN_EVENT_MAP.keys():
             print(f"initializing pin {pin}")
             GPIO.add_event_detect(
-                pin, GPIO.RISING, callback=lambda _: self.on_gpio_event(pin)
+                pin, GPIO.RISING, callback=lambda _: self._on_gpio_event(pin)
             )
+    def _on_gpio_event(self, pin):
+        self.on_gpio_event(pin)
 
     def set_on_gpio_event_handler(self, on_gpio_event):
         print("new gpio event handler")
@@ -90,7 +92,7 @@ class EventHandlerMixin:
         self.event_map = {}
 
     def on_gpio_event(self, pin):
-        print(f"pin: {pin}")
+        print(f"mixinpin: {pin}")
         if pin in PIN_EVENT_MAP:
             event = PIN_EVENT_MAP[pin]
             self.handle_event(event)
