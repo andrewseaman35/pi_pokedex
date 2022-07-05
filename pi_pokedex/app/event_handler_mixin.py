@@ -57,8 +57,9 @@ class _GPIOManager:
         for pin in PIN_EVENT_MAP.keys():
             print(f"initializing pin {pin}")
             GPIO.add_event_detect(
-                pin, GPIO.RISING, callback=lambda _: self._on_gpio_event(pin)
+                pin, GPIO.RISING, callback=self._on_gpio_event, bouncetime=200
             )
+
     def _on_gpio_event(self, pin):
         self.on_gpio_event(pin)
 
