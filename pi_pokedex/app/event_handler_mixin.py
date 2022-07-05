@@ -61,6 +61,8 @@ class _GPIOManager:
             )
 
     def set_on_gpio_event_handler(self, on_gpio_event):
+        print("new gpio event handler")
+        print(on_gpio_event)
         self.on_gpio_event = on_gpio_event
 
 
