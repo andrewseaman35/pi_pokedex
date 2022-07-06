@@ -13,8 +13,8 @@ EVENT_BACK = "back"
 EVENT_SELECT = "select"
 
 # Channel numbers, not GPIO numbers
-PIN_UP = 3
-PIN_DOWN = 5
+PIN_UP = 12
+PIN_DOWN = 16
 PIN_LEFT = 7
 PIN_RIGHT = 11
 PIN_SELECT = 13
