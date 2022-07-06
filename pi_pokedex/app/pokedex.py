@@ -116,7 +116,8 @@ class Main(tk.Tk):
         self.frame = self.frame_stack[-1]
         self.frame.tkraise()
         self.frame.focus_set()
-        self.frame.on_resume()
+        if hasattr(self.frame, "on_resume"):
+            self.frame.on_resume()
 
     def render_current_frame(self):
         self.frame.grid(column=0, row=0, sticky="nsew")
