@@ -67,3 +67,6 @@ def on_gpio_event(self, pin):
 
 gpio_manager = GPIOManager()
 gpio_manager.set_on_gpio_event_handler(on_gpio_event)
+
+while True:
+    pass
