@@ -63,6 +63,7 @@ def on_gpio_event(pin):
     print(f"GPIO Pin:: {pin}")
     if pin in PIN_EVENT_MAP:
         print(f"PIN: {PIN_EVENT_MAP[pin]}")
+        print(f"value: {GPIO.input(pin)}")
 
 
 gpio_manager = GPIOManager()
