@@ -3,13 +3,13 @@ import os
 import RPi.GPIO as GPIO
 
 # Channel numbers, not GPIO numbers
-PIN_UP = 12
-PIN_DOWN = 16
+PIN_UP = 13
+PIN_DOWN = 7
 
-PIN_LEFT = 7
+PIN_LEFT = 16
 PIN_RIGHT = 11
-PIN_SELECT = 13
-PIN_BACK = 15
+PIN_SELECT = 15
+PIN_BACK = 18
 
 PIN_EVENT_MAP = {
     PIN_UP: "EVENT_UP",
