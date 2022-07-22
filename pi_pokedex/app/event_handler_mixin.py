@@ -15,6 +15,7 @@ EVENT_SELECT = "select"
 # Channel numbers, not GPIO numbers
 PIN_UP = 12
 PIN_DOWN = 16
+
 PIN_LEFT = 7
 PIN_RIGHT = 11
 PIN_SELECT = 13
@@ -97,6 +98,7 @@ class EventHandlerMixin:
         print(f"mixinpin: {pin}")
         if pin in PIN_EVENT_MAP:
             event = PIN_EVENT_MAP[pin]
+            print(f"PIN: {PIN_EVENT_MAP[pin]}")
             self.handle_event(event)
 
     def on_keyboard_press(self, e):
