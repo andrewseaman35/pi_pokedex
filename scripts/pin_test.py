@@ -5,8 +5,8 @@ import RPi.GPIO as GPIO
 # Channel numbers, not GPIO numbers
 PIN_UP = 13
 PIN_DOWN = 7
-PIN_LEFT = 16
-PIN_RIGHT = 11
+PIN_LEFT = 11
+PIN_RIGHT = 16
 
 PIN_SELECT = 18
 PIN_BACK = 15
