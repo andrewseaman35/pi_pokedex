@@ -163,10 +163,6 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
         self.focus_set()
         self.render()
 
-    def tkraise(self):
-        self.activate_gpio_handlers()
-        super().tkraise()
-
     @property
     def active_next_frame_id(self):
         if self.pokemon_frame.active:

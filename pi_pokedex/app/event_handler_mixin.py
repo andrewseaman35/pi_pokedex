@@ -87,11 +87,14 @@ class EventHandlerMixin:
         self.event_map = {}
 
         print(f"initing: {self}")
-
-        if config.IS_RUNNING_ON_RPI:
-            GPIOManager().set_on_gpio_event_handler(self.on_gpio_event)
-
+        self.activate_gpio_handlers()
         self.bind("<KeyPress>", self.on_keyboard_press)
+
+
+
+    def tkraise(self):
+        self.activate_gpio_handlers()
+        super().tkraise()
 
     def activate_gpio_handlers(self):
         if config.IS_RUNNING_ON_RPI:
