@@ -143,9 +143,10 @@ class SettingsItem(tk.Frame):
 
 class HomeFrame(EventHandlerMixin, tk.Frame):
     def __init__(self, master=None, on_item_select=None):
-        super().__init__(master)
-        self.master = master
         self.on_item_select = on_item_select
+        self.master = master
+
+        super().__init__(master)
 
         self.configure(
             background=config.BACKGROUND_COLOR,
@@ -161,6 +162,10 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
 
         self.focus_set()
         self.render()
+
+    def tkraise(self):
+        self.activate_gpio_handlers()
+        super().tkraise()
 
     @property
     def active_next_frame_id(self):

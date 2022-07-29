@@ -83,17 +83,19 @@ def GPIOManager():
 class EventHandlerMixin:
 
     def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.event_map = {}
 
-        super().__init__(*args, **kwargs)
         print(f"initing: {self}")
 
-        self.gpio_manager = None
         if config.IS_RUNNING_ON_RPI:
-            self.gpio_manager = GPIOManager()
-            self.gpio_manager.set_on_gpio_event_handler(self.on_gpio_event)
+            GPIOManager().set_on_gpio_event_handler(self.on_gpio_event)
 
         self.bind("<KeyPress>", self.on_keyboard_press)
+
+    def activate_gpio_handlers(self):
+        if config.IS_RUNNING_ON_RPI:
+            GPIOManager().set_on_gpio_event_handler(self.on_gpio_event)
 
     def init_event_map(self):
         self.event_map = {}
