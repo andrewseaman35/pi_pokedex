@@ -99,7 +99,6 @@ class EventHandlerMixin:
         self.event_map = {}
 
     def on_gpio_event(self, pin):
-        print(f"mixinpin: {pin}")
         if pin in PIN_EVENT_MAP:
             event = PIN_EVENT_MAP[pin]
             print(f"PIN: {PIN_EVENT_MAP[pin]}")
@@ -112,6 +111,5 @@ class EventHandlerMixin:
 
     def handle_event(self, event_type):
         handler = self.event_map.get(event_type)
-        print(f"handling {handler}")
         if handler:
             handler()
