@@ -15,11 +15,13 @@ EVENT_SELECT = "select"
 # Channel numbers, not GPIO numbers
 PIN_UP = 13
 PIN_DOWN = 7
-
 PIN_LEFT = 16
 PIN_RIGHT = 11
-PIN_SELECT = 15
-PIN_BACK = 18
+
+PIN_SELECT = 18
+PIN_BACK = 15
+
+# left and back
 
 PIN_EVENT_MAP = {
     PIN_UP: EVENT_UP,
@@ -69,8 +71,7 @@ class _GPIOManager:
             self.on_gpio_event(pin)
 
     def set_on_gpio_event_handler(self, on_gpio_event):
-        print("new gpio event handler")
-        print(on_gpio_event)
+        print(f"new gpio event handler: {on_gpio_event}")
         self.on_gpio_event = on_gpio_event
 
 
