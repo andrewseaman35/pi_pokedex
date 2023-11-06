@@ -7,6 +7,7 @@ import config
 
 from pokemon import Pokemon
 
+from frames.camera import CameraFrame, CaptureFrame
 from frames.home import HomeFrame
 from frames.navigation import NavigationFrame, NavigationEntry
 from frames.settings import SettingsFrame
@@ -80,6 +81,16 @@ class Main(tk.Tk):
                 navigate_back=self.navigate_back,
                 show_pokemon_info=self.on_pokemon_select,
             ),
+            "camera": lambda: CameraFrame(
+                master=self,
+                navigate_back=self.navigate_back,
+                display_captured_image=self.display_captured_image,
+            ),
+            "capture": lambda filepath: CaptureFrame(
+                master=self,
+                on_back=self.on_return_to_menu,
+                filepath=filepath,
+            ),
             "settings": lambda: SettingsFrame(
                 master=self,
                 on_back=self.on_return_to_menu,
@@ -103,6 +114,9 @@ class Main(tk.Tk):
         self.frame = self.frame_by_id[frame_id](**kwargs)
         self.render_current_frame()
 
+    def display_captured_image(self, filepath):
+        self.show_frame("capture", filepath=filepath)
+
     def on_return_to_menu(self):
         self.navigate_back()
         self.show_frame("menu")
@@ -122,6 +136,7 @@ class Main(tk.Tk):
         self.frame.grid_rowconfigure(0, weight=1)
         self.frame.grid_columnconfigure(0, weight=1)
         self.frame.tkraise()
+        self.frame.focus_set()
         self.frame_stack.append(self.frame)
 
 

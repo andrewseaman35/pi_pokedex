@@ -3,14 +3,10 @@ ROOTDIR := $(shell pwd)
 VENV_PYTHON := venv/bin/python
 
 UNAME := $(shell uname -m)
-ifeq ($(UNAME),arm64)
-PYTHON=python3.10
-else
-PYTHON=python3.7
-endif
+PYTHON=python
 
 venv: requirements.txt
-	virtualenv venv --python=$(PYTHON)
+	python -m virtualenv venv --python=$(PYTHON)
 	venv/bin/pip install -r requirements.txt
 
 start: venv
@@ -19,4 +15,4 @@ start: venv
 clean:
 	rm -rf venv
 
-.PHONY: clean
+.PHONY: clean venv

@@ -168,7 +168,7 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
         if self.pokemon_frame.active:
             return "pokemon_selector"
         if self.camera_frame.active:
-            return None
+            return "camera"
         return "settings"
 
     def handle_up(self):
