@@ -3,13 +3,15 @@ import os
 import RPi.GPIO as GPIO
 
 # Channel numbers, not GPIO numbers
-PIN_UP = 13
-PIN_DOWN = 7
-PIN_LEFT = 11
-PIN_RIGHT = 16
+PIN_UP = 22
+PIN_DOWN = 38
+PIN_LEFT = 16
+PIN_RIGHT = 32
 
-PIN_SELECT = 18
-PIN_BACK = 15
+PIN_LED = 12
+
+PIN_SELECT = 5
+PIN_BACK = 3
 
 PIN_EVENT_MAP = {
     PIN_UP: "EVENT_UP",
@@ -35,6 +37,8 @@ class _GPIOManager:
         GPIO.setmode(GPIO.BOARD)
         for pin in PIN_EVENT_MAP.keys():
             GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(PIN_LED, GPIO.OUT)
+        GPIO.output(PIN_LED, GPIO.LOW)
 
     def add_event_detection(self):
         print("Initialing events")

@@ -13,13 +13,13 @@ EVENT_BACK = "back"
 EVENT_SELECT = "select"
 
 # Channel numbers, not GPIO numbers
-PIN_UP = 13
-PIN_DOWN = 7
-PIN_LEFT = 11
-PIN_RIGHT = 16
+PIN_UP = 22
+PIN_DOWN = 38
+PIN_LEFT = 16
+PIN_RIGHT = 32
 
-PIN_SELECT = 18
-PIN_BACK = 15
+PIN_SELECT = 5
+PIN_BACK = 3
 
 # left and back
 
@@ -67,6 +67,7 @@ class _GPIOManager:
     def _on_gpio_event(self, pin):
         # Despite us setting GPIO.RISING, this seems to trigger on both, make sure
         # input is high before firing.
+        print(f"event on pin {pin}")
         if GPIO.input(pin):
             self.on_gpio_event(pin)
 
@@ -93,6 +94,7 @@ class EventHandlerMixin:
 
 
     def tkraise(self):
+        print(f"### RAISING: {self}")
         self.activate_gpio_handlers()
         super().tkraise()
 
