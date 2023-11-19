@@ -1,5 +1,4 @@
 import tkinter as tk
-
 import config
 
 from .type_badges import TypeBadges
@@ -30,15 +29,16 @@ class InfoHeader(tk.Frame):
             0,
             0,
             fill="black",
-            font=(config.TYPEFACE, 10),
-            text=self.pokemon.number_string,
+            font=(config.TYPEFACE, config.INFO_NUMBER_FONT_SIZE), 
+            text=self.pokemon.number_string, 
             anchor=tk.NW,
         )
+
         self.pokemon_text = self.canvas.create_text(
             0,
-            12,
+            config.INFO_NUMBER_FONT_SIZE + 4,
             fill="black",
-            font=(f"{config.TYPEFACE} Bold", 14),
+            font=(f"{config.TYPEFACE} Bold", config.INFO_POKEMON_FONT_SIZE),
             text=pokemon.name,
             anchor=tk.NW,
         )

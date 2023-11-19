@@ -15,7 +15,7 @@ from frames.pokemon_info import PokemonInfoFrame
 
 
 class SplashFrame(tk.Frame):
-    image_size = (200, 200)
+    image_size = (400, 400)
 
     def __init__(self, master=None):
         super().__init__(master, bg="white")
@@ -37,10 +37,10 @@ class Main(tk.Tk):
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
         self.wm_attributes('-fullscreen', 'True')
+        self.attributes("-fullscreen", True)
         self.title("Pokedéx")
         self.geometry(f"{config.SCREEN_WIDTH}x{config.SCREEN_HEIGHT}")
         self.resizable(False, False)
-        # self.attributes("-fullscreen", True)
 
         self.frame_stack = []
 

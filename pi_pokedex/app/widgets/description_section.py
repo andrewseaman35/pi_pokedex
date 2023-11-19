@@ -29,7 +29,7 @@ class DescriptionSection(tk.Frame):
             0,
             0,
             fill="black",
-            font=(config.TYPEFACE, 7),
+            font=(config.TYPEFACE, config.DESCRIPTION_FONT_SIZE),
             text=self.description,
             anchor=tk.NW,
             width=config.SCREEN_WIDTH - 20,

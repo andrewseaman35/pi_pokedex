@@ -55,7 +55,7 @@ class HomeItem(tk.Frame):
             text=self.text,
             background=config.HOME_ITEM_COLOR,
             fg=config.BLACK,
-            font=tkfont.Font(family=config.TYPEFACE, size=10, weight="bold"),
+            font=tkfont.Font(family=config.TYPEFACE, size=config.HOME_ITEM_FONT_SIZE, weight="bold"),
             anchor=tk.W,
             justify=tk.LEFT,
         )
@@ -113,10 +113,10 @@ class SettingsItem(tk.Frame):
             height=self.height,
         )
         self.text = self.canvas.create_text(
-            config.SCREEN_WIDTH / 2 - 30,
-            3,
+            config.SCREEN_WIDTH / 2 - 60,
+            config.HOME_SETTINGS_TEXT_PADY,
             fill="black",
-            font=tkfont.Font(family=config.TYPEFACE, size=10, weight="bold"),
+            font=tkfont.Font(family=config.TYPEFACE, size=config.HOME_ITEM_FONT_SIZE, weight="bold"),
             text=self.text,
             anchor=tk.N,
         )
@@ -200,8 +200,8 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
     def render(self):
         self.pokemon_frame = HomeItem(
             self,
-            width=config.HOME_ITEM_WIDTH,
-            height=config.HOME_ITEM_HEIGHT,
+            #width=config.HOME_ITEM_WIDTH,
+            #height=config.HOME_ITEM_HEIGHT,
             text="Pokemon",
             state="active",
             icon="icon_pokeball",
@@ -237,7 +237,7 @@ class HomeFrame(EventHandlerMixin, tk.Frame):
 
 
 class HomeItemImage(tk.Frame):
-    image_size = (100, 100)
+    image_size = (200, 200)
 
     def __init__(self, master, icon):
         super().__init__(master, bg=config.HOME_ITEM_COLOR)
@@ -255,9 +255,11 @@ class HomeItemImage(tk.Frame):
         photo = PIL.ImageTk.PhotoImage(im)
         label = tk.Label(
             self.master,
+            width=config.HOME_IMG_WIDTH,
+            height=config.HOME_IMG_HEIGHT,
             image=photo,
             bg=config.HOME_ITEM_COLOR,
             borderwidth=0,
         )
         label.image = photo
-        label.pack(side=tk.TOP, padx=25, pady=(15, 0))
+        label.pack(side=tk.TOP, padx=config.HOME_IMG_PADX, pady=config.HOME_IMG_PADY)

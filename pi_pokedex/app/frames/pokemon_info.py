@@ -52,7 +52,7 @@ class PokemonInfoFrame(EventHandlerMixin, tk.Frame):
         self.evolution_section = EvolutionSection(self, self.pokemon)
 
         header.pack(side=tk.TOP, padx=10, pady=(10, 8))
-        stats.pack(side=tk.TOP, padx=10)
+        stats.pack(side=tk.TOP, padx=10, pady=(0, 12))
         description.pack(side=tk.TOP)
         self.evolution_section.pack(side=tk.TOP, expand=True)
 

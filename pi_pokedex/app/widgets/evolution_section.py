@@ -10,7 +10,7 @@ class EvolutionSectionItem(tk.Frame):
         self,
         master,
         text,
-        size=11,
+        size=config.EVO_FONT_SIZE,
         bold=False,
         italic=False,
         underline=False,
@@ -51,7 +51,7 @@ class EvolutionSectionItem(tk.Frame):
         self.label.pack(
             side=tk.LEFT,
             # padx=10,
-            pady=(0, 4),
+            pady=(0, 16),
         )
 
     def set_font_modifiers(self, underline=False):
@@ -122,19 +122,19 @@ class EvolutionSection(tk.Frame):
                 is_last = evolution.number == self.evolution_pokemon[-1].number
                 active = evolution.number == self.pokemon.number
                 evolution_item = Evolution(inner, evolution.name, active=active)
-                evolution_item.pack(side=tk.LEFT, pady=(4, 0))
+                evolution_item.pack(side=tk.LEFT, pady=config.EVO_ITEM_PAD_Y)
                 self.item_frames.append(evolution_item)
 
                 if active:
                     self.highlighted_index = len(self.item_frames) - 1
 
                 if not is_last:
-                    EvolutionSectionItem(inner, ">", size=14, justify=tk.CENTER).pack(
-                        side=tk.LEFT, padx=10
+                    EvolutionSectionItem(inner, ">", size=config.EVO_FONT_SIZE, justify=tk.CENTER).pack(
+                        side=tk.LEFT, padx=10, pady=config.EVO_ITEM_PAD_Y
                     )
         else:
             EvolutionSectionItem(inner, "No evolutions", italic=True).pack(
-                side=tk.LEFT, pady=(4, 0)
+                side=tk.LEFT, pady=config.EVO_ITEM_PAD_Y
             )
 
     def rerender(self):

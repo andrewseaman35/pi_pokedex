@@ -43,10 +43,10 @@ class NavigationItem(tk.Frame):
             height=self.height,
         )
         self.text = self.canvas.create_text(
-            20,
-            5,
+            40,
+            10,
             fill="black",
-            font=tkfont.Font(family=config.TYPEFACE, size=12, weight="normal"),
+            font=tkfont.Font(family=config.TYPEFACE, size=config.NAV_ITEM_FONT_SIZE, weight="normal"),
             text=self.text,
             anchor=tk.NW,
         )

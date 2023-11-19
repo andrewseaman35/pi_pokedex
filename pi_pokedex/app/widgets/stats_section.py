@@ -19,7 +19,7 @@ STAT_VALUE_TO_DISPLAY = {
 
 
 class PokemonImage(tk.Frame):
-    image_size = (100, 100)
+    image_size = (200, 200)
 
     def __init__(self, master, pokemon):
         super().__init__(master, bg="white")
@@ -67,7 +67,7 @@ class StatsColumn(tk.Frame):
                 text=label,
                 bg=config.BACKGROUND_COLOR,
                 fg=config.BLACK,
-                font=(config.TYPEFACE, 7),
+                font=(config.TYPEFACE, 14),
                 anchor=tk.W,
                 justify=tk.LEFT,
                 width=label_chars,
@@ -79,10 +79,10 @@ class StatsColumn(tk.Frame):
                 text=value,
                 bg=config.BACKGROUND_COLOR,
                 fg=config.BLACK,
-                font=(f"{config.TYPEFACE} Bold", 7),
+                font=(f"{config.TYPEFACE} Bold", 14),
                 anchor=value_anchor,
                 justify=tk.LEFT,
-                wraplength=70,
+                wraplength=config.STATS_VALUE_WRAP_LENGTH,
                 width=value_chars,
             )
             value_element.grid(column=1, row=i)
