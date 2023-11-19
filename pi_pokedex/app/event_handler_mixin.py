@@ -18,8 +18,8 @@ PIN_DOWN = 38
 PIN_LEFT = 16
 PIN_RIGHT = 32
 
-PIN_SELECT = 5
-PIN_BACK = 3
+PIN_SELECT = 11
+PIN_BACK = 13
 
 # left and back
 
