@@ -1,14 +1,16 @@
-import time
 import os
+import random
+import time
 import tempfile
 
 import boto3
 
 STATE_CREATED = "created"
+STATE_COMPLETED = "completed"
 
 class PokemonIdentifier(object):
     region = "us-east-1"
-    is_local = True
+    is_local = False
 
     def __init__(self, event, context):
         self.event = event
@@ -43,12 +45,8 @@ class PokemonIdentifier(object):
         result = self.ddb_client.get_item(
             TableName=self.ddb_table_name,
             Key={
-                "source": {
-                    "S": self.source
-                },
-                "key": {
-                    "S": self.group
-                },
+                "source": {"S": self.source},
+                "key": {"S": self.group},
             }
         )
         ddb_item = result.get("Item", None)
@@ -72,6 +70,29 @@ class PokemonIdentifier(object):
             Item=ddb_item,
         )
         return self._ddb_item_to_json(ddb_item)
+
+    def _save_result(self, result):
+        timestamp = self._get_timestamp()
+        print("storing result")
+        self.ddb_client.update_item(
+            TableName=self.ddb_table_name,
+            Key={
+                "source": {"S": self.source},
+                "key": {"S": self.group},
+            },
+            UpdateExpression="SET #re = :re, #tu = :tu, #st = :st",
+            ExpressionAttributeNames={
+                "#re": "result",
+                "#tu": "time_updated",
+                "#st": "state",
+            },
+            ExpressionAttributeValues={
+                ":re": {"N": str(result)},
+                ":st": {"S": STATE_COMPLETED},
+                ":tu": {"N": timestamp},
+            },
+        )
+
 
     @classmethod
     def _ddb_item_to_json(cls, ddb_item):
@@ -111,27 +132,38 @@ class PokemonIdentifier(object):
         return local_filename
 
     def _original_s3_key(self):
-        return f"{self.s3_key_prefix}/original.png"
+        return f"{self.s3_key_prefix}/original.jpg"
+
+    def identify(self, filename):
+        return random.randrange(0, 151)
 
     def handle(self):
         self._gather_parameters(self.event)
+        print(self.event)
         item = self._get_item()
-        if not item:
-            item = self._create_new_entry()
+        if item:
+            return item['result']
+
+        item = self._create_new_entry()
         print(item)
 
         filename = self._download(self._original_s3_key())
         print(filename)
 
-        return {"hi": "oh"}
+        pokemon_number = self.identify(filename)
+        self._save_result(pokemon_number)
+
+        return {
+            "pokemon_number": pokemon_number
+        }
 
 
 def lambda_handler(event, context):
     return PokemonIdentifier(event, context).handle()
 
-event = {
-    'source': 'prototype_v0.3',
-    'group': 'test1',
-}
+# event = {
+#     'source': 'test',
+#     'group': 'test1',
+# }
 
-lambda_handler(event, None)
+# print(lambda_handler(event, None))

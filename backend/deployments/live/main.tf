@@ -101,12 +101,22 @@ resource "aws_iam_role_policy" "pokemon_identifier_role_policy" {
         Action = [
           "s3:PutObject",
           "s3:ListBucket",
+          "s3:HeadObject",
           "s3:GetObject"
         ]
         Resource = [
           "arn:aws:s3:::${var.s3_bucket_name}",
           "arn:aws:s3:::${var.s3_bucket_name}/${var.s3_key_prefix}*"
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+        ]
+        Resource = aws_dynamodb_table.pokedex_table.arn
       },
       {
         Effect = "Allow"
@@ -120,16 +130,20 @@ resource "aws_iam_role_policy" "pokemon_identifier_role_policy" {
 }
 
 resource "aws_lambda_function" "pokemon_identifier_lambda_function" {
-filename                       = "${path.module}/../../outputs/pokemon_identifier.zip"
-function_name                  = "pokemon-identifier"
-role                           = aws_iam_role.pokemon_identifier_role.arn
-handler                        = "lambda_handler.lambda_handler"
-runtime                        = "python3.9"
+    # filename                       = "${path.module}/../../outputs/pokemon_identifier.zip"
+    filename         = data.archive_file.pokemon_identifier_zip.output_path
+    function_name    = "pokemon-identifier"
+    role             = aws_iam_role.pokemon_identifier_role.arn
+    handler          = "lambda_handler.lambda_handler"
+    runtime          = "python3.9"
+    timeout          = 10
+    source_code_hash = data.archive_file.pokemon_identifier_zip.output_base64sha256
 
-depends_on                     = [
-    aws_iam_role_policy.pokemon_identifier_role_policy,
-    data.archive_file.pokemon_identifier_zip
-]
+
+    depends_on       = [
+        aws_iam_role_policy.pokemon_identifier_role_policy,
+        data.archive_file.pokemon_identifier_zip
+    ]
 }
 
 
@@ -171,6 +185,7 @@ resource "aws_iam_role_policy" "pokedex_role_policy" {
         Action = [
           "s3:PutObject",
           "s3:ListBucket",
+          "s3:HeadObject",
           "s3:GetObject"
         ]
         Resource = [
@@ -205,4 +220,10 @@ resource "aws_ssm_parameter" "s3_key_prefix" {
   name  = "/pokedex/live/s3_key_prefix"
   type  = "String"
   value = var.s3_key_prefix
+}
+
+resource "aws_ssm_parameter" "identifier_lambda_function_name" {
+  name  = "/pokedex/live/identifier_lambda_function_name"
+  type  = "String"
+  value = aws_lambda_function.pokemon_identifier_lambda_function.function_name
 }
