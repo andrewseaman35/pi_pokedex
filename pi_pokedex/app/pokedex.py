@@ -124,7 +124,7 @@ class Main(tk.Tk):
         IdentifierApi().upload(filepath, config.SOURCE, "test4")
         LEDManager().stop()
         LEDManager().start('alternate', 0.3)
-        result = IdentifierApi().identify()
+        result = IdentifierApi().identify(config.SOURCE, 'test4')
         self.destroy_and_render_last()
         self.on_pokemon_select(result)
         LEDManager().stop()

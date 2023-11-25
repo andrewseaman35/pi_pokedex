@@ -16,7 +16,7 @@ class PokemonIdentifier(object):
         self.event = event
         self.context = context
         self.aws_session = (
-            boto3.session.Session(profile_name="aseaman")
+            boto3.session.Session(profile_name="pokedex")
             if self.is_local
             else boto3.session.Session()
         )
@@ -142,7 +142,9 @@ class PokemonIdentifier(object):
         print(self.event)
         item = self._get_item()
         if item:
-            return item['result']
+            return {
+                'pokemon_number': item['result']
+            }
 
         item = self._create_new_entry()
         print(item)
