@@ -121,10 +121,10 @@ class Main(tk.Tk):
 
     def upload_and_display_captured_image(self, filepath):
         self.show_frame("capture", filepath=filepath)
-        IdentifierApi().upload(filepath, config.SOURCE, "test4")
+        upload_group = IdentifierApi().upload(filepath, config.SOURCE)
         LEDManager().stop()
         LEDManager().start('alternate', 0.3)
-        result = IdentifierApi().identify(config.SOURCE, 'test4')
+        result = IdentifierApi().identify(config.SOURCE, upload_group)
         self.destroy_and_render_last()
         self.on_pokemon_select(result)
         LEDManager().stop()

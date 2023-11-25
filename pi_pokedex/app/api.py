@@ -1,6 +1,7 @@
 import time
 import json
 import boto3
+import uuid
 
 
 class _IdentifierApi:
@@ -23,7 +24,11 @@ class _IdentifierApi:
         response = self.ssm_client.get_parameter(Name=key)
         return response["Parameter"]["Value"]
 
-    def upload(self, filepath, source, group):
+    def _new_group_id(self):
+        return uuid.uuid4().hex
+
+    def upload(self, filepath, source):
+        group = self._new_group_id()
         start = time.time()
         print(f"Start upload: {start}")
         key = f"{self.s3_key_prefix}{source}/{group}/original.jpg"
@@ -34,7 +39,7 @@ class _IdentifierApi:
                 Key=key,
             )
         print(f"End upload: {time.time() - start}")
-        return key
+        return group
 
     def identify(self, source, group):
         start = time.time()
