@@ -24,7 +24,7 @@ class _LEDManager:
     _LED_PINS = _LED_TRIO + [
         _LED_BULB,
     ]
-    
+
     _PATTERNS = {
         'forward': [
             [1, 0, 0],
@@ -52,7 +52,7 @@ class _LEDManager:
         print("LED INIT")
         self.__running = False
         self.__thread = threading.Thread(target=self._run)
-        
+
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BOARD)
         for pin in self._LED_PINS:
@@ -74,33 +74,33 @@ class _LEDManager:
                 self._LED_TRIO,
                 [GPIO.HIGH if values else GPIO.LOW for _ in self._LED_TRIO]
             )
-            
+
     def reset(self):
         self.set_bulb(0)
         self.set_trio(0)
-    
+
     def start(self, pattern, duration):
         if self.__running:
             raise Exception("LEDs already running")
-        
+
         self.__running = True
-        self.__thread = threading.Thread(target=lambda: self.run(pattern, duration))
+        self.__thread = threading.Thread(target=lambda: self._run(pattern, duration))
         self.__thread.start()
-        
+
     def stop(self):
         self.__running = False
         self.join()
         self.reset()
-    
+
     def join(self):
         if self.__thread.is_alive():
             self.__thread.join()
 
-    def run(self, pattern, delay):
+    def _run(self, pattern, delay):
         self.__running = True
         assert delay >= 0
         values = self._PATTERNS[pattern]
-        
+
         while self.__running:
             for p in values:
                 self.set_trio(p)

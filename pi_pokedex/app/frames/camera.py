@@ -6,6 +6,9 @@ from picamera import PiCamera
 import PIL
 
 import config
+from api import IdentifierApi
+from led import LEDManager
+
 from event_handler_mixin import (
     EventHandlerMixin,
     EVENT_LEFT,
@@ -54,6 +57,9 @@ class CameraFrame(EventHandlerMixin, tk.Frame):
         image_file = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
         print(f"saving image to {image_file.name}")
         self.camera.capture(image_file.name)
+
+        LEDManager().start('wave', 0.4)
+
         self.camera.stop_preview()
         self.camera.close()
         print("** about to navigate back")
@@ -76,14 +82,14 @@ class CaptureFrame(EventHandlerMixin, tk.Frame):
     def __init__(self, master=None, on_back=None, filepath=None):
         super().__init__(master, bg="white")
         self.master = master
-        
-        
+
+
         self.event_map = {
             EVENT_BACK: self.handle_back,
             EVENT_SELECT: self.handle_select,
-            
+
         }
-        
+
         self.on_back = on_back
         self.filepath = filepath
         self.render_image()
@@ -97,9 +103,12 @@ class CaptureFrame(EventHandlerMixin, tk.Frame):
         label.image = photo
         label.grid(row=0, column=0)
 
+        IdentifierApi().upload(self.filepath, config.SOURCE, "test4")
+        LEDManager().stop()
+
     def handle_back(self):
         print("back")
         self.on_back()
-        
+
     def handle_select(self):
         print('select')

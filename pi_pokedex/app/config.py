@@ -1,5 +1,7 @@
 import os
 
+SOURCE = "test"
+
 #TYPEFACE = "Avenir Next"
 TYPEFACE = "FreeSans"
 
