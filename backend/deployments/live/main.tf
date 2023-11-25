@@ -101,7 +101,6 @@ resource "aws_iam_role_policy" "pokemon_identifier_role_policy" {
         Action = [
           "s3:PutObject",
           "s3:ListBucket",
-          "s3:HeadObject",
           "s3:GetObject"
         ]
         Resource = [
@@ -162,6 +161,60 @@ resource "aws_iam_role" "pokedex_role" {
           Service = "lambda.amazonaws.com"
         }
       },
+    ]
+  })
+}
+
+resource "aws_iam_user" "pokedex_user" {
+  name = "pokedex"
+}
+
+resource "aws_iam_access_key" "pokedex_user_access_key" {
+  user = aws_iam_user.pokedex_user.name
+}
+
+data "aws_iam_policy_document" "pokedex_user_policy_document" {
+  statement {
+    effect    = "Allow"
+    actions   = ["ec2:Describe*"]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_user_policy" "pokedex_user_policy" {
+  name   = "pokedex_user_policy"
+  user   = aws_iam_user.pokedex_user.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:PutObject",
+          "s3:ListBucket",
+          "s3:HeadObject",
+          "s3:GetObject"
+        ]
+        Resource = [
+          "arn:aws:s3:::${var.s3_bucket_name}",
+          "arn:aws:s3:::${var.s3_bucket_name}/${var.s3_key_prefix}*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameter"
+        ]
+        Resource = "arn:aws:ssm:${local.aws_region}:${local.aws_account_id}:parameter/*"
+      }, {
+        Effect = "Allow"
+        Action = [
+          "lambda:InvokeFunction"
+        ]
+        Resource = [
+          aws_lambda_function.pokemon_identifier_lambda_function.arn
+        ]
+      }
     ]
   })
 }
