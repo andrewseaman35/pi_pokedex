@@ -6,7 +6,6 @@ from picamera import PiCamera
 import PIL
 
 import config
-from api import IdentifierApi
 from led import LEDManager
 
 from event_handler_mixin import (
@@ -25,12 +24,12 @@ from widgets.evolution_section import EvolutionSection
 
 class CameraFrame(EventHandlerMixin, tk.Frame):
     def __init__(
-        self, master=None, navigate_back=None, display_captured_image=None
+        self, master=None, navigate_back=None, upload_and_display_captured_image=None
     ):
         super().__init__(master)
         self.master = master
         self.navigate_back = navigate_back
-        self.display_captured_image = display_captured_image
+        self.upload_and_display_captured_image = upload_and_display_captured_image
 
         self.event_map = {
             EVENT_SELECT: self.handle_select,
@@ -58,7 +57,7 @@ class CameraFrame(EventHandlerMixin, tk.Frame):
         print(f"saving image to {image_file.name}")
         self.camera.capture(image_file.name)
 
-        LEDManager().start('wave', 0.1)
+        LEDManager().start('forward', 0.1)
 
         self.camera.stop_preview()
         self.camera.close()
@@ -68,7 +67,7 @@ class CameraFrame(EventHandlerMixin, tk.Frame):
         from time import sleep
         sleep(1)
         print("displaying captured image")
-        self.display_captured_image(image_file.name)
+        self.upload_and_display_captured_image(image_file.name)
 
     def handle_back(self):
         self.camera.stop_preview()
@@ -102,9 +101,6 @@ class CaptureFrame(EventHandlerMixin, tk.Frame):
         label = tk.Label(self, image=photo, borderwidth=0, highlightthickness=0)
         label.image = photo
         label.grid(row=0, column=0)
-
-        IdentifierApi().upload(self.filepath, config.SOURCE, "test4")
-        LEDManager().stop()
 
     def handle_back(self):
         print("back")

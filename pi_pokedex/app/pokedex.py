@@ -5,6 +5,7 @@ import tkinter as tk
 
 import config
 
+from api import IdentifierApi
 from led import LEDManager
 from pokemon import Pokemon
 
@@ -88,7 +89,7 @@ class Main(tk.Tk):
             "camera": lambda: CameraFrame(
                 master=self,
                 navigate_back=self.navigate_back,
-                display_captured_image=self.display_captured_image,
+                upload_and_display_captured_image=self.upload_and_display_captured_image,
             ),
             "capture": lambda filepath: CaptureFrame(
                 master=self,
@@ -118,8 +119,15 @@ class Main(tk.Tk):
         self.frame = self.frame_by_id[frame_id](**kwargs)
         self.render_current_frame()
 
-    def display_captured_image(self, filepath):
+    def upload_and_display_captured_image(self, filepath):
         self.show_frame("capture", filepath=filepath)
+        IdentifierApi().upload(self.filepath, config.SOURCE, "test4")
+        LEDManager().stop()
+        LEDManager().start('alternate', 0.1)
+        result = IdentifierApi().identify()
+        self.destroy_and_render_last()
+        self.on_pokemon_select(result)
+        LEDManager().stop()
 
     def on_return_to_menu(self):
         self.navigate_back()
