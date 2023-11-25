@@ -1,7 +1,6 @@
 import time
 import json
 import boto3
-now_1 = time.time()
 
 
 class _IdentifierApi:
@@ -52,16 +51,12 @@ class _IdentifierApi:
         )
 
         print(response)
-        json_response = response['Payload'].read()
+        json_response = json.load(response['Payload'])
         print(json_response)
         print(f"Done: {time.time() - start}")
-        return 1
+        return json_response['pokemon_number']
 
 def IdentifierApi():
     if _IdentifierApi._instance is None:
         _IdentifierApi._instance = _IdentifierApi()
     return _IdentifierApi._instance
-
-
-filepath = '/Users/andrewseaman/repos/pi_pokedex/pi_pokedex/assets/img/pokemon/1.png'
-IdentifierApi().upload(filepath, 'test', 'test2')

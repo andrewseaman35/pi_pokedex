@@ -13,11 +13,12 @@ ACTION_EXIT = "exit"
 class SettingsFrame(NavigationFrame):
     def __init__(self, master, on_back=None):
         ip_address = get_ip_address()
-        exit_entry = (
-            NavigationEntry(ACTION_SHUTDOWN, "Shutdown")
-            if config.IS_RUNNING_ON_RPI else
-            NavigationEntry(ACTION_EXIT, "Exit")
-        )
+        # exit_entry = (
+        #     NavigationEntry(ACTION_SHUTDOWN, "Shutdown")
+        #     if config.IS_RUNNING_ON_RPI else
+        #     NavigationEntry(ACTION_EXIT, "Exit")
+        # )
+        exit_entry = NavigationEntry(ACTION_EXIT, "Exit")
         items = [
             NavigationEntry("ip", f"IP Address: {ip_address}"),
             NavigationEntry("version", "Version: 0.0.1"),

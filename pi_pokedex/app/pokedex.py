@@ -15,7 +15,7 @@ from frames.navigation import NavigationFrame, NavigationEntry
 from frames.settings import SettingsFrame
 from frames.pokemon_info import PokemonInfoFrame
 
-LEDManager.start('wave', 0.1)
+LEDManager().start('wave', 0.1)
 
 
 class SplashFrame(tk.Frame):
@@ -59,7 +59,7 @@ class Main(tk.Tk):
         splash_frame.grid_columnconfigure(0, weight=1)
         splash_frame.tkraise()
         self.after(config.SPLASH_TIME, lambda: self.show_frame("menu"))
-        self.after(config.SPLASH_TIME, LEDManager.stop)
+        self.after(config.SPLASH_TIME, lambda: LEDManager().stop())
         self.frame_stack.append(splash_frame)
         self.initialize()
 
@@ -121,9 +121,9 @@ class Main(tk.Tk):
 
     def upload_and_display_captured_image(self, filepath):
         self.show_frame("capture", filepath=filepath)
-        IdentifierApi().upload(self.filepath, config.SOURCE, "test4")
+        IdentifierApi().upload(filepath, config.SOURCE, "test4")
         LEDManager().stop()
-        LEDManager().start('alternate', 0.1)
+        LEDManager().start('alternate', 0.3)
         result = IdentifierApi().identify()
         self.destroy_and_render_last()
         self.on_pokemon_select(result)
