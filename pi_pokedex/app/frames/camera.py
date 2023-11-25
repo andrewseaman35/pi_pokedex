@@ -58,7 +58,7 @@ class CameraFrame(EventHandlerMixin, tk.Frame):
         print(f"saving image to {image_file.name}")
         self.camera.capture(image_file.name)
 
-        LEDManager().start('wave', 0.4)
+        LEDManager().start('wave', 0.1)
 
         self.camera.stop_preview()
         self.camera.close()

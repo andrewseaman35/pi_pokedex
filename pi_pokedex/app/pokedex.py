@@ -5,6 +5,7 @@ import tkinter as tk
 
 import config
 
+from led import LEDManager
 from pokemon import Pokemon
 
 from frames.camera import CameraFrame, CaptureFrame
@@ -12,6 +13,8 @@ from frames.home import HomeFrame
 from frames.navigation import NavigationFrame, NavigationEntry
 from frames.settings import SettingsFrame
 from frames.pokemon_info import PokemonInfoFrame
+
+LEDManager.start('wave', 0.1)
 
 
 class SplashFrame(tk.Frame):
@@ -55,6 +58,7 @@ class Main(tk.Tk):
         splash_frame.grid_columnconfigure(0, weight=1)
         splash_frame.tkraise()
         self.after(config.SPLASH_TIME, lambda: self.show_frame("menu"))
+        self.after(config.SPLASH_TIME, LEDManager.stop)
         self.frame_stack.append(splash_frame)
         self.initialize()
 
