@@ -1,4 +1,5 @@
 import datetime
+import sys
 import time
 import threading
 
@@ -113,3 +114,14 @@ def LEDManager():
     if _LEDManager._instance is None:
         _LEDManager._instance = _LEDManager()
     return _LEDManager._instance
+
+if __name__ == "__main__":
+    command = sys.argv[1]
+    if command {'start', 'stop'}:
+        raise Exception("invalid command")
+    if command == 'start':
+        if sys.argv[1] not in LEDManager()._PATTERNS:
+            raise Exception("invalid pattern")
+        LEDManager().start(sys.argv[1], 0.3)
+    elif command == 'stop':
+        LEDManager().stop()
