@@ -117,11 +117,15 @@ def LEDManager():
 
 if __name__ == "__main__":
     command = sys.argv[1]
-    if command {'start', 'stop'}:
+    if command not in {'start', 'stop'}:
         raise Exception("invalid command")
     if command == 'start':
-        if sys.argv[1] not in LEDManager()._PATTERNS:
+        pattern = sys.argv[1]
+        if pattern not in LEDManager()._PATTERNS:
             raise Exception("invalid pattern")
-        LEDManager().start(sys.argv[1], 0.3)
+        duration = float(sys.argv[1])
+        if duration <= 0:
+            raise ValueError("bad duration")
+        LEDManager().start(sys.argv[1], duration)
     elif command == 'stop':
         LEDManager().stop()
